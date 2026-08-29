@@ -21,7 +21,7 @@ class Register extends Component
     public function register()
     {
         $this->validate();
-        
+
         // Your registration logic here
         // ...
     }

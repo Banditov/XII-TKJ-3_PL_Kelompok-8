@@ -109,17 +109,29 @@
                 @enderror
             </div>
 
-            {{-- Button --}}
-            <button type="submit" wire:loading.attr="disabled" wire:target="register"
-                class="relative bg-linear-to-r from-[#4AA9ED] to-[#3a8fd4] hover:from-[#3a8fd4] hover:to-[#2a7fb4] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg mt-2 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed w-75">
-                <span class="relative z-10 flex items-center justify-center gap-2">
-                    {!! icon('add', 'w-8 h-8 text-white') !!}
-                    Buat
-                </span>
-                <div
-                    class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
-                </div>
-            </button>
+            {{-- Buttons --}}
+            <div class="flex gap-10 w-full">
+                <button
+                    class="relative bg-linear-to-r from-[#ed4a4a] to-[#d43a3a] hover:from-[#d43a3a] hover:to-[#b42a2a] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg mt-2 shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed w-full">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        {!! icon('logout', 'w-8 h-8 text-white') !!}
+                        Kembali
+                    </span>
+                    <div
+                        class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
+                    </div>
+                </button>
+                <button type="submit" wire:loading.attr="disabled" wire:target="register"
+                    class="relative bg-linear-to-r from-[#4AA9ED] to-[#3a8fd4] hover:from-[#3a8fd4] hover:to-[#2a7fb4] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg mt-2 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed w-full">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        {!! icon('add', 'w-8 h-8 text-white') !!}
+                        Buat
+                    </span>
+                    <div
+                        class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
+                    </div>
+                </button>
+            </div>
         </form>
 
         <p class="text-white/20 text-xs mt-8 tracking-widest">
