@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Logimm') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,12 +16,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-hidden h-screen">
+<body class="overflow-hidden h-screen **:select-none">
     <!-- Background -->
     <div class="fixed inset-0 z-0 bg-slate-950">
         <canvas id="bgCanvas" class="w-full h-full block"></canvas>
 
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none">
+        <div class="absolute inset-0 bg-linear-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none">
         </div>
 
         <div class="absolute inset-0 pointer-events-none"
