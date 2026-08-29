@@ -6,14 +6,30 @@
     <div
         class="glass bg-black/20 backdrop-blur-[5px] border border-black/15 rounded-t-[80px] shadow-2xl shadow-black/60 py-10 px-15 w-160 text-center text-white transition-all duration-300 hover:shadow-black/80 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
 
-        <p class="text-5xl font-bold mb-10 text-white">Login</p>
+        <p class="text-5xl font-bold mb-7 text-white">Registrasi</p>
 
-        <div class="text-white/40 mb-10">
-            <p class="text-2xl">"Sebuah Quote"</p>
-            <p class="text-xl">- Nama Penulis</p>
-        </div>
+        <form wire:submit="register" class="flex flex-col items-center gap-4 mb-15 zoom-120">
+            {{-- Name Field --}}
+            <div class="text-left w-full">
+                <label for="name" class="block text-sm font-medium text-white/70 mb-2 tracking-wide">
+                    Name
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                        {!! icon('person', 'w-5 h-5 text-white/30') !!}
+                    </div>
+                    <input type="text" id="name" wire:model="name" autofocus
+                        class="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10"
+                        placeholder="Masukkan nama">
+                </div>
+                @error('name')
+                    <span class="text-red-400 text-sm mt-1.5 flex items-center gap-1">
+                        {!! icon('important', 'w-4 h-4') !!}
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
 
-        <form wire:submit="login" class="flex flex-col items-center gap-6 mb-25 zoom-120">
             {{-- Email Field --}}
             <div class="text-left w-full">
                 <label for="email" class="block text-sm font-medium text-white/70 mb-2 tracking-wide">
@@ -25,7 +41,7 @@
                     </div>
                     <input type="email" id="email" wire:model="email" autofocus
                         class="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10"
-                        placeholder="Masukkan email Anda">
+                        placeholder="Masukkan email">
                 </div>
                 @error('email')
                     <span class="text-red-400 text-sm mt-1.5 flex items-center gap-1">
@@ -36,7 +52,7 @@
             </div>
 
             {{-- Password Field --}}
-            <div class="text-left w-full mb-10">
+            <div class="text-left w-full">
                 <label for="password" class="block text-sm font-medium text-white/70 mb-2 tracking-wide">
                     Password
                 </label>
@@ -46,7 +62,7 @@
                     </div>
                     <input type="password" id="password" wire:model="password" :type="show ? 'text' : 'password'"
                         class="w-full pl-12 pr-14 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10"
-                        placeholder="Masukkan password Anda">
+                        placeholder="Masukkan password">
                     <button type="button" @click="show = !show"
                         class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white/70 transition-colors">
                         <span x-show="!show">
@@ -65,12 +81,40 @@
                 @enderror
             </div>
 
+            {{-- Class Field --}}
+            <div class="text-left w-full mb-7">
+                <label for="class" class="block text-sm font-medium text-white/70 mb-2 tracking-wide">
+                    Class
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {!! icon('people', 'w-5 h-5 text-white/30') !!}
+                    </div>
+                    <select id="class" 
+                            wire:model="class"
+                            class="w-full pl-12 pr-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer">
+                        <option value="" class="bg-slate-900 text-white/60">Pilih Kelas</option>
+                        <option value="XII TKJ 3" class="bg-slate-900 text-white">XII TKJ 3</option>
+                    </select>
+                    <!-- Custom dropdown arrow -->
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                        {!! icon('arrow', 'w-6 h-6 text-white/30') !!}
+                    </div>
+                </div>
+                @error('class')
+                    <span class="text-red-400 text-sm mt-1.5 flex items-center gap-1">
+                        {!! icon('important', 'w-4 h-4') !!}
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
             {{-- Button --}}
-            <button type="submit" wire:loading.attr="disabled" wire:target="login"
+            <button type="submit" wire:loading.attr="disabled" wire:target="register"
                 class="relative bg-linear-to-r from-[#4AA9ED] to-[#3a8fd4] hover:from-[#3a8fd4] hover:to-[#2a7fb4] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg mt-2 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed w-75">
                 <span class="relative z-10 flex items-center justify-center gap-2">
-                    {!! icon('logout', 'w-8 h-8 text-white') !!}
-                    Masuk
+                    {!! icon('add', 'w-8 h-8 text-white') !!}
+                    Buat
                 </span>
                 <div
                     class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
