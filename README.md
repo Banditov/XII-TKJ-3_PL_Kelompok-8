@@ -201,7 +201,7 @@ ImmaSpark adalah sebuah website tempat siswa bisa menyimpan, membagikan, dan men
 
 ## Lisensi
 
-Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE.txt`](./LICENSE.txt) untuk informasi lebih lanjut.
+Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informasi lebih lanjut.
 
 ## Changelog
 
