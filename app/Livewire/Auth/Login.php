@@ -51,13 +51,13 @@ class Login extends Component
                 ]);
 
                 session()->regenerate();
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/agenda');
             }
         }
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/agenda');
         }
 
         $this->addError('email', 'The provided credentials do not match our records.');
