@@ -4,17 +4,33 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Asta Sans Variable', sans-serif;
 
     --breakpoint-2xs: 420px;
     --breakpoint-3xs: 390px;
     --breakpoint-4xs: 320px;
 }
 
-.bg-pattern-grid {
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
+/* Fix for autofill */
+@layer base {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset !important;
+        -webkit-text-fill-color: white !important;
+        caret-color: white !important;
+        background-clip: text !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input:-webkit-autofill:focus {
+        border-color: rgba(59, 130, 246, 0.3) !important;
+        outline: none !important;
+    }
+
+    select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset !important;
+        -webkit-text-fill-color: white !important;
+    }
 }

@@ -1,5 +1,6 @@
 import * as anime from 'animejs';
 import './components/background.js';
+import '@fontsource-variable/asta-sans';
 import GlassEffect from './components/glassmorphism.js';
 
 window.anime = anime.default || anime;
