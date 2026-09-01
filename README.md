@@ -1,10 +1,8 @@
-<h1 align="center">Logimm</h1>
-
-<!-- <img src=".github/images/banner/banner.png"> -->
+<img src=".github/images/banner/banner.png">
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-wip--0.3.0-red">
+      <img src="https://img.shields.io/badge/GitHub Version-wip--0.4.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -207,6 +205,20 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
    <summary>Tekan untuk Buka</summary>
+
+<details>
+   <summary>September</summary>
+
+### 01/09/2026 - 0.4.0
+
+<details>
+
+- Membuat loading screen
+- Perbaiki tombol kembali pada halaman admin registrasi
+- Added banner for README
+</details>
+
+</details>
 
 <details>
    <summary>Agustus</summary>

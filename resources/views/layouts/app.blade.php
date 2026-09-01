@@ -8,16 +8,19 @@
 
     <title>{{ config('app.name', 'Logimm') }}</title>
 
-    <!-- Fonts -->
+    {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
+    {{-- Scripts --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="overflow-hidden h-screen **:select-none">
-    <!-- Background -->
+    {{-- Loading Screen --}}
+    <x-loading-screen type="spinner" />
+
+    {{-- Background --}}
     <div class="fixed inset-0 z-0 bg-slate-950">
         <canvas id="bgCanvas" class="w-full h-full block"></canvas>
 
@@ -35,7 +38,7 @@
         </div>
     </div>
 
-    <!-- Page Content -->
+    {{-- Page Content --}}
     <main class="relative z-10 h-screen flex flex-col justify-end p-4 pb-0">
         {{ $slot }}
     </main>

@@ -1,9 +1,16 @@
 import * as anime from 'animejs';
-import './components/background.js';
+import Alpine from 'alpinejs';
+
 import '@fontsource-variable/asta-sans';
+
+import './components/background.js';
 import GlassEffect from './components/glassmorphism.js';
+import loadingScreen from './components/loading.js';
 
 window.anime = anime.default || anime;
+
+// Loading Screen
+Alpine.data('loadingScreen', loadingScreen);
 
 // Disable zoom
 document.addEventListener('DOMContentLoaded', function () {
@@ -36,10 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 // Glassmorphism effect
 let glass = null;
-
 function initGlass() {
     if (glass) glass.destroy();
     glass = new GlassEffect({ 
@@ -49,3 +54,7 @@ function initGlass() {
 
 document.addEventListener('DOMContentLoaded', initGlass);
 document.addEventListener('livewire:navigated', initGlass);
+
+if (!window.Alpine?.started) {
+    Alpine.start();
+}

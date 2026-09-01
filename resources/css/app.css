@@ -34,3 +34,17 @@
         -webkit-text-fill-color: white !important;
     }
 }
+
+/* Loading Screen */
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 2s linear infinite;
+}

@@ -111,7 +111,7 @@
 
             {{-- Buttons --}}
             <div class="flex gap-10 w-full">
-                <button
+                <button type="button"
                     class="relative bg-linear-to-r from-[#ed4a4a] to-[#d43a3a] hover:from-[#d43a3a] hover:to-[#b42a2a] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg mt-2 shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed w-full">
                     <span class="relative z-10 flex items-center justify-center gap-2">
                         {!! icon('logout', 'w-8 h-8 text-white') !!}
