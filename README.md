@@ -213,13 +213,6 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
 
-- Menyelesaikan perbaikan halaman agenda
-</details>
-
-### 01/09/2026 - 0.4.2
-
-<details>
-
 - Memperbaiki halaman agenda
 </details>
 
