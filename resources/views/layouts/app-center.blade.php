@@ -39,13 +39,7 @@
     </div>
 
     {{-- Page Content --}}
-    <main class="flex justify-between h-full flex-col sm:flex-row">
-        <x-side-bar />
-
-        <div class="flex items-center justify-center p-10 pb-0 sm:hidden">
-            <img src="{{ asset('images/logo-logimm.png') }}" class="w-60 drop-shadow-2xl 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:zoom-75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
-        </div>
-
+    <main class="relative z-10 h-screen flex flex-col justify-end">
         {{ $slot }}
     </main>
 </body>

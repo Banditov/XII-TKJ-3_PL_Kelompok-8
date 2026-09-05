@@ -11,5 +11,4 @@ Route::get('/', function () {
 
 Route::get('/login', Login::class)->name('login');
 Route::get('/agenda', AgendaIndex::class)->name('agenda');
-
 Route::get('/admin/register', Register::class)->name('admin.register');
