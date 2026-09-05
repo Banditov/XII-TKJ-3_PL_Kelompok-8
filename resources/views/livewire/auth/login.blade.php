@@ -1,7 +1,7 @@
 <div x-data="{ show: false }" class="w-full flex items-center justify-between h-full flex-col gap-6">
     <div></div> {{-- Spacer --}}
 
-    <img src="{{ asset('images/logo-smk-immanuel.png') }}" class="w-120 drop-shadow-2xl 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
+    <img src="{{ asset('images/logo-logimm.png') }}" class="w-120 drop-shadow-2xl 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
 
     <div
         class="glass bg-black/20 backdrop-blur-[5px] border border-black/15 rounded-t-[80px] shadow-2xl shadow-black/60 py-10 px-15 w-160 text-center text-white transition-all duration-300 hover:shadow-black/80 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">

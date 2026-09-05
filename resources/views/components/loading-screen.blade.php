@@ -1,10 +1,6 @@
-@props([
-    'show' => false,
-])
-
 <div x-data="loadingScreen()" x-init="init()" x-show="show" x-transition:leave="transition ease-in duration-300"
     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950 backdrop-blur-sm"
+    class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-950 backdrop-blur-sm"
     style="display: none;">
 
     <div class="flex flex-col items-center gap-6">

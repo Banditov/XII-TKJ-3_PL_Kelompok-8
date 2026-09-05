@@ -2,7 +2,7 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-wip--0.4.0-red">
+      <img src="https://img.shields.io/badge/GitHub Version-0.4.2-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -209,11 +209,26 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>September</summary>
 
-### 01/09/2026 - 0.4.0
+### 05/09/2026 - 0.4.2
+
+<details>
+
+- Menyelesaikan perbaikan halaman agenda
+</details>
+
+### 01/09/2026 - 0.4.2
+
+<details>
+
+- Memperbaiki halaman agenda
+</details>
+
+### 01/09/2026 - 0.4.1
 
 <details>
 
 - Membuat loading screen
+- Menyelesaikan view halaman agenda
 - Perbaiki tombol kembali pada halaman admin registrasi
 - Added banner for README
 </details>

@@ -6,6 +6,7 @@
 @theme {
     --font-sans: 'Asta Sans Variable', sans-serif;
 
+    --breakpoint-xs: 480px;
     --breakpoint-2xs: 420px;
     --breakpoint-3xs: 390px;
     --breakpoint-4xs: 320px;
