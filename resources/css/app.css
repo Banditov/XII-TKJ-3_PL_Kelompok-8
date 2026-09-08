@@ -12,6 +12,22 @@
     --breakpoint-4xs: 320px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator, input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
 /* Fix for autofill */
 @layer base {
     input:-webkit-autofill,
