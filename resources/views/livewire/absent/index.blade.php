@@ -9,7 +9,7 @@
         <div x-data="{ open: false }" class="relative flex items-center gap-3">
             <p class="text-lg font-semibold text-white">Pilih Tanggal:</p>
             <button type="button" @click="$refs.datePicker.showPicker(); open = true"
-                class="flex items-center gap-2 rounded-[14px] border border-white/20 bg-white/5 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
                 {!! icon('calendar', 'h-5 w-5') !!}
                 <span>{{ \Illuminate\Support\Carbon::parse($selectedDate)->translatedFormat('d-m-Y') }}</span>
             </button>
@@ -21,7 +21,7 @@
     <!-- Status Absensi Saya Hari Ini -->
     <div class="mb-7 flex items-center justify-between gap-5 rounded-[18px] border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20 backdrop-blur-sm">
         <div class="flex items-center gap-5">
-            <div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/70">
+            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-sky-300 text-white/70">
                 {!! icon('time', 'h-8 w-8') !!}
             </div>
             <div class="flex flex-col">
@@ -32,11 +32,11 @@
 
         <div class="flex flex-col gap-3">
             <button type="button" wire:click="absenMasuk"
-                class="rounded-[14px] border border-white/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                class="rounded-[14px] border border-green-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-green-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
                 Absen Masuk
             </button>
             <button type="button" wire:click="ajukanIzin"
-                class="rounded-[14px] border border-white/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                class="rounded-[14px] border border-yellow-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-yellow-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
                 Pengajuan Izin
             </button>
         </div>
@@ -56,9 +56,9 @@
             </div>
         </div>
         <div
-            class="rounded-[18px] border flex gap-5 items-center border-emerald-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
+            class="rounded-[18px] border flex gap-5 items-center border-green-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
             <div
-                class="flex h-20 w-20 items-center justify-center rounded-full border border-emerald-400/20 bg-emerald-500/10 text-emerald-300/70">
+                class="flex h-20 w-20 items-center justify-center rounded-full border border-green-400/20 bg-green-500/10 text-green-300/70">
                 {!! icon('correct', 'h-10 w-10') !!}
             </div>
             <div class="flex flex-col">
@@ -95,7 +95,7 @@
                     </div>
 
                     @if ($student['status'] === 'hadir')
-                        <span class="rounded-[14px] border border-emerald-400/20 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300/70">
+                        <span class="rounded-[14px] border border-green-400/20 bg-green-500/10 px-4 py-2 text-sm font-semibold text-green-300/70">
                             Sudah Absen
                         </span>
                     @elseif ($student['status'] === 'izin')
