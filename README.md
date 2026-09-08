@@ -249,7 +249,7 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>September</summary>
 
-### 05/09/2026 - 0.5.0
+### 08/09/2026 - 0.5.0
 
 <details>
 
