@@ -27,6 +27,6 @@ class AgendaIndex extends Component
 
     public function render()
     {
-        return view('livewire.agenda.index')->layout('layouts.app');
+        return view('livewire.agenda.index');
     }
 }

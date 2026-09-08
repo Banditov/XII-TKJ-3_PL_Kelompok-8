@@ -50,6 +50,6 @@ class AbsentIndex extends Component
 
     public function render()
     {
-        return view('livewire.absent.index')->layout('layouts.app');
+        return view('livewire.absent.index');
     }
 }
