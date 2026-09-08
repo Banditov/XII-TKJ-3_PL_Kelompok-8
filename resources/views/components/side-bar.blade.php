@@ -5,44 +5,62 @@
 
         <nav class="flex flex-col items-center gap-4">
             <div class="w-full h-0.5 bg-white rounded-full"></div>
-            <button type="button" class="flex h-12 w-12 items-center rounded-br-none rounded-tr-none justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
+            <a href="{{ route('absent') }}" 
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'absent' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('group', 'h-8 w-8') !!}
-            </button>
-            <button type="button" class="flex h-12 w-12 items-center rounded-br-none rounded-tr-none border-r-2 border-white justify-center rounded-2xl bg-linear-to-br from-blue-300/30 to-blue-500/15 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 transition-all duration-300 hover:scale-105">
-                {!! icon('clipboard', 'h-8 w-8 text-white') !!}
-            </button>
-            <button type="button" class="flex h-12 w-12 items-center rounded-br-none rounded-tr-none justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
+            </a>
+            <a href="{{ route('agenda') }}" 
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'agenda' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
+                {!! icon('clipboard', 'h-8 w-8') !!}
+            </a>
+            <a href="" 
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'placeholder' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('calendar', 'h-8 w-8') !!}
-            </button>
-            <button type="button" class="flex h-12 w-12 items-center rounded-br-none rounded-tr-none justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
+            </a>
+            <a href="" 
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'placeholder' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('id', 'h-8 w-8') !!}
-            </button>
+            </a>
         </nav>
     </div>
 
     <div class="flex flex-col items-center gap-4">
         <div class="w-full h-0.5 bg-white rounded-full"></div>
-        <button type="button" class="flex h-12 w-12 items-center rounded-br-none rounded-tr-none justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
-            {!! icon('logout', 'h-8 w-8') !!}
-        </button>
+        <form method="POST" action="">
+            @csrf
+            <button type="submit" class="flex h-12 w-12 items-center justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
+                {!! icon('logout', 'h-8 w-8') !!}
+            </button>
+        </form>
     </div>
 </aside>
 
 {{-- Mobile --}}
 <nav class="flex sm:hidden fixed bottom-0 left-0 z-50 w-full items-center">
-    <button type="button" class="flex aspect-square w-[20%] items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-tr-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+    <a href="{{ route('absent') }}" 
+        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'absent' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-tr-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('group', 'aspect-square w-[50%]') !!}
-    </button>
-    <button type="button" class="flex aspect-square w-[20%] items-center justify-center border-t-6 border-white/50 rounded-t-2xl bg-linear-to-br from-blue-300 to-blue-500 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 transition-all duration-300">
-        {!! icon('clipboard', 'aspect-square w-[50%] text-white') !!}
-    </button>
-    <button type="button" class="flex aspect-square w-[20%] items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-t-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+    </a>
+    
+    <a href="{{ route('agenda') }}" 
+        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'agenda' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-2xl transition-all duration-300 hover:bg-gray-800 hover:text-white">
+        {!! icon('clipboard', 'aspect-square w-[50%]') !!}
+    </a>
+    
+    <a href="" 
+        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'placeholder' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('calendar', 'aspect-square w-[50%]') !!}
-    </button>
-    <button type="button" class="flex aspect-square w-[20%] items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-t-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+    </a>
+    
+    <a href="" 
+        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'placeholder' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('id', 'aspect-square w-[50%]') !!}
-    </button>
-    <button type="button" class="flex aspect-square w-[20%] items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-tl-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
-        {!! icon('logout', 'aspect-square w-[50%]') !!}
-    </button>
+    </a>
+    
+    <form method="POST" action="" class="w-[20%] aspect-square">
+        @csrf
+        <button type="submit" class="flex aspect-square w-full items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-tl-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+            {!! icon('logout', 'aspect-square w-[50%]') !!}
+        </button>
+    </form>
 </nav>

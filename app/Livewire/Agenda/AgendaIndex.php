@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Agenda;
 
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
+#[Layout('layouts.app', ['active' => 'agenda'])]
 class AgendaIndex extends Component
 {
     public array $tasksNow = [];
