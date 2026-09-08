@@ -2,12 +2,12 @@
     <!-- Header -->
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
-            <h1 class="text-5xl font-bold">Absensi Siswa</h1>
+            <h1 class="text-5xl font-bold 4xs:zoom-60 2xs:zoom-70 xs:zoom-80 sm:zoom-100">Absensi Siswa</h1>
             <p class="font-semibold">XII TKJ 3</p>
         </div>
 
         <div x-data="{ open: false }" class="relative flex items-center gap-3">
-            <p class="text-lg font-semibold text-white">Pilih Tanggal:</p>
+            <p class="text-lg font-semibold text-white 4xs:hidden sm:block">Pilih Tanggal:</p>
             <button type="button" @click="$refs.datePicker.showPicker(); open = true"
                 class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
                 {!! icon('calendar', 'h-5 w-5') !!}
@@ -19,24 +19,24 @@
     </header>
 
     <!-- Status Absensi Saya Hari Ini -->
-    <div class="mb-7 flex items-center justify-between gap-5 rounded-[18px] border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20 backdrop-blur-sm">
+    <div class="mb-7 flex items-center justify-between 4xs:flex-col sm:flex-row gap-5 rounded-[18px] border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20 backdrop-blur-sm">
         <div class="flex items-center gap-5">
             <div class="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-sky-300 text-white/70">
                 {!! icon('time', 'h-8 w-8') !!}
             </div>
             <div class="flex flex-col">
-                <h2 class="text-2xl font-bold text-white">Status Absensi Saya Hari Ini</h2>
+                <h2 class="text-2xl font-bold text-white 4xs:zoom-70 2xs:zoom-80 sm:zoom-90 md:zoom-100">Status Absensi Saya Hari Ini</h2>
                 <p class="text-lg font-medium text-white/50">Status : {{ $myStatus }}</p>
             </div>
         </div>
 
-        <div class="flex flex-col gap-3">
+        <div class="flex 4xs:flex-row sm:flex-col gap-3 4xs:w-full sm:w-auto justify-between">
             <button type="button" wire:click="absenMasuk"
-                class="rounded-[14px] border border-green-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-green-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                class="rounded-[14px] border w-full border-green-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-green-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
                 Absen Masuk
             </button>
             <button type="button" wire:click="ajukanIzin"
-                class="rounded-[14px] border border-yellow-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-yellow-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                class="rounded-[14px] border w-full border-yellow-400/20 bg-white/5 px-6 py-2.5 text-lg font-semibold text-yellow-300/70 shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
                 Pengajuan Izin
             </button>
         </div>
@@ -95,15 +95,15 @@
                     </div>
 
                     @if ($student['status'] === 'hadir')
-                        <span class="rounded-[14px] border border-green-400/20 bg-green-500/10 px-4 py-2 text-sm font-semibold text-green-300/70">
+                        <span class="rounded-[14px] border text-center border-green-400/20 bg-green-500/10 px-4 py-2 text-sm font-semibold text-green-300/70">
                             Sudah Absen
                         </span>
                     @elseif ($student['status'] === 'izin')
-                        <span class="rounded-[14px] border border-yellow-400/20 bg-yellow-500/10 px-4 py-2 text-sm font-semibold text-yellow-300/70">
+                        <span class="rounded-[14px] border text-center border-yellow-400/20 bg-yellow-500/10 px-4 py-2 text-sm font-semibold text-yellow-300/70">
                             Izin
                         </span>
                     @else
-                        <span class="rounded-[14px] border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/50">
+                        <span class="rounded-[14px] border text-center border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/50">
                             Belum Absen
                         </span>
                     @endif
