@@ -72,7 +72,7 @@
 
         <!-- Buttons -->
         <div class="flex flex-col sm:flex-row gap-8 mt-4">
-            <a href="{{ route('agenda') }}"
+            <a href="{{ route('agenda') }}" wire:navigate
                 class="relative bg-linear-to-r from-[#ed4a4a] to-[#d43a3a] hover:from-[#d43a3a] hover:to-[#b42a2a] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group w-full sm:w-1/2 text-center">
                 <span class="relative z-10 flex items-center justify-center gap-2">
                     Batal

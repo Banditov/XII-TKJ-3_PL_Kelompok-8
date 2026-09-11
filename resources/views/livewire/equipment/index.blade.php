@@ -6,7 +6,7 @@
             <p class="font-semibold">XII TKJ 3</p>
         </div>
 
-        <a href="{{ route('equipment.create') }}"
+        <a href="{{ route('equipment.create') }}" wire:navigate
             class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
             <p class="4xs:hidden sm:block">Tambah</p>
             <p class="text-2xl leading-none">+</p>
@@ -45,7 +45,7 @@
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-lime-400/20 bg-lime-500/10 text-lime-300/50 transition-all duration-300 hover:bg-lime-500/20 hover:text-lime-300/80"
                             aria-label="Tambah">+</button>
 
-                        <a href="{{ route('equipment.edit', $item['id']) }}"
+                        <a href="{{ route('equipment.edit', $item['id']) }}" wire:navigate
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80"
                             aria-label="Ubah">
                             {!! icon('pencil', 'h-5 w-5') !!}

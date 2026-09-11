@@ -1,7 +1,14 @@
-<div x-data="loadingScreen()" x-init="init()" x-show="show" x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-    class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-950 backdrop-blur-sm"
-    style="display: none;">
+<div x-data="loadingScreen()" 
+    x-init="init()" 
+    x-show="show" 
+    x-cloak
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="fixed inset-0 z-9999 flex items-center justify-center bg-slate-950 backdrop-blur-sm">
 
     <div class="flex flex-col items-center gap-6">
         <div class="relative">

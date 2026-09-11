@@ -3,6 +3,8 @@ function loadingScreen() {
         show: false,
         loadingCount: 0,
         timeoutId: null,
+        shownAt: null,
+        minDisplayTime: 200,
 
         init() {
             this.showLoader();
@@ -22,7 +24,7 @@ function loadingScreen() {
                 });
 
                 Livewire.hook('message.received', () => {
-                    setTimeout(() => this.hideLoader(), 300);
+                    this.hideLoader();
                 });
 
                 Livewire.hook('message.failed', () => {
@@ -37,14 +39,18 @@ function loadingScreen() {
             });
 
             document.addEventListener('livewire:navigated', () => {
-                setTimeout(() => this.hideLoader(), 300);
+                this.hideLoader();
             });
         },
 
         showLoader() {
             this.loadingCount++;
-            this.show = true;
-            document.body.style.overflow = 'hidden';
+
+            if (!this.show) {
+                this.show = true;
+                this.shownAt = Date.now();
+                document.body.style.overflow = 'hidden';
+            }
 
             if (this.timeoutId) {
                 clearTimeout(this.timeoutId);
@@ -55,24 +61,19 @@ function loadingScreen() {
         hideLoader() {
             this.loadingCount--;
 
-            if (this.loadingCount <= 0) {
-                this.loadingCount = 0;
+            if (this.loadingCount > 0) return;
+            this.loadingCount = 0;
 
-                this.timeoutId = setTimeout(() => {
-                    this.show = false;
-                    document.body.style.overflow = '';
-                    this.timeoutId = null;
-                }, 300);
-            }
+            const elapsed = Date.now() - (this.shownAt ?? 0);
+            const remaining = Math.max(0, this.minDisplayTime - elapsed);
+
+            this.timeoutId = setTimeout(() => {
+                this.show = false;
+                this.shownAt = null;
+                document.body.style.overflow = '';
+                this.timeoutId = null;
+            }, remaining);
         },
-
-        show() {
-            this.showLoader();
-        },
-
-        hide() {
-            this.hideLoader();
-        }
     };
 }
 
