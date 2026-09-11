@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Livewire\Perlengkapan;
+namespace App\Livewire\Equipment;
 
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class PerlengkapanIndex extends Component
+#[Layout('layouts.app', ['active' => 'equipment'])]
+class EquipmentIndex extends Component
 {
     public array $equipment = [
         ['name' => 'Proyektor', 'total' => 1, 'damaged' => 0],
@@ -13,6 +15,6 @@ class PerlengkapanIndex extends Component
 
     public function render()
     {
-        return view('livewire.perlengkapan.index')->layout('layouts.app');
+        return view('livewire.equipment.index');
     }
 }

@@ -8,7 +8,7 @@
 
         <a href="{{ route('agenda.create') }}"
             class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
-            <p>Tambah</p>
+            <p class="4xs:hidden sm:block">Tambah</p>
             <p class="text-2xl leading-none">+</p>
         </a>
     </header>
