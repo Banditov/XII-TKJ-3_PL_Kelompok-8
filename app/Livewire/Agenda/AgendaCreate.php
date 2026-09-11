@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Livewire\Agenda;
 
+use App\Data\AgendaData;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -19,7 +19,6 @@ class AgendaCreate extends Component
         'description' => 'nullable|max:1000',
         'date' => 'required|date|after_or_equal:today',
         'time' => 'required',
-        'time_end' => 'nullable|after:time',
     ];
 
     protected $messages = [
@@ -28,15 +27,25 @@ class AgendaCreate extends Component
         'date.required' => 'Tanggal wajib diisi.',
         'date.after_or_equal' => 'Tanggal tidak boleh kurang dari hari ini.',
         'time.required' => 'Waktu wajib diisi.',
-        'time_end.after' => 'Waktu selesai harus setelah waktu mulai.',
     ];
 
-    public function mount()
+    public function mount(): void
     {
+        $this->date = now()->format('Y-m-d');
+        $this->time = now()->format('H:i');
     }
 
-    public function save()
+    public function save(): void
     {
+        $this->validate();
+
+        try {
+            session()->flash('success', 'Agenda berhasil ditambahkan!');
+
+            $this->redirect(route('agenda.index'));
+        } catch (\Exception $e) {
+            session()->flash('error', 'Gagal menambahkan agenda. Silakan coba lagi.');
+        }
     }
 
     public function render()

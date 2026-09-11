@@ -254,6 +254,8 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
 
 - Membuat halaman edit/tambah perlengkapan kelas
+- Membuat dummy data agar dapat diview
+- Memperbaiki class glass yang mengikuti scroll
 </details>
 
 ### 11/09/2026 - 0.6.1
