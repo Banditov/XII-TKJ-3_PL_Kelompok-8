@@ -6,11 +6,11 @@
             <p class="font-semibold">XII TKJ 3</p>
         </div>
 
-        <button type="button"
+        <a href="{{ route('equipment.create') }}"
             class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
             <p class="4xs:hidden sm:block">Tambah</p>
             <p class="text-2xl leading-none">+</p>
-        </button>
+        </a>
     </header>
 
     <!-- Daftar Perlengkapan -->
@@ -20,7 +20,8 @@
 
         <div class="space-y-4">
             @foreach ($equipment as $item)
-                <article class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
+                <article
+                    class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
                     <div class="flex flex-col gap-1">
                         <h3 class="text-2xl font-semibold">{{ $item['name'] }}</h3>
                         <p class="text-white/50">{{ $item['damaged'] > 0 ? $item['damaged'] . ' Rusak' : 'Normal' }}</p>
@@ -30,7 +31,8 @@
                         <button type="button"
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80"
                             aria-label="Kurangi">-</button>
-                        <span class="flex h-10 w-10 items-center justify-center rounded-[14px] border border-white/10 bg-white/5 text-2xl font-semibold">{{ $item['total'] }}</span>
+                        <span
+                            class="flex h-10 w-10 items-center justify-center rounded-[14px] border border-white/10 bg-white/5 text-2xl font-semibold">{{ $item['total'] }}</span>
                         <button type="button"
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-lime-400/20 bg-lime-500/10 text-lime-300/50 transition-all duration-300 hover:bg-lime-500/20 hover:text-lime-300/80"
                             aria-label="Tambah">+</button>
