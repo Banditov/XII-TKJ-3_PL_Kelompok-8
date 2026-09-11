@@ -1,7 +1,8 @@
 <div x-data="{ show: false }" class="w-full flex items-center justify-between h-full flex-col gap-6">
     <div></div> {{-- Spacer --}}
 
-    <img src="{{ asset('images/logo-logimm.png') }}" class="w-120 drop-shadow-2xl 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
+    <img src="{{ asset('images/logo-logimm.png') }}"
+        class="w-120 drop-shadow-2xl 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
 
     <div
         class="glass bg-black/20 backdrop-blur-[5px] border border-black/15 rounded-t-[80px] shadow-2xl shadow-black/60 py-10 px-15 w-160 text-center text-white transition-all duration-300 hover:shadow-black/80 4xs:zoom-60 3xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
@@ -90,9 +91,8 @@
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         {!! icon('people', 'w-5 h-5 text-white/30') !!}
                     </div>
-                    <select id="class" 
-                            wire:model="class"
-                            class="w-full pl-12 pr-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer">
+                    <select id="class" wire:model="class"
+                        class="w-full pl-12 pr-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer">
                         <option value="" class="bg-slate-900 text-white/60">Pilih Kelas</option>
                         <option value="XII TKJ 3" class="bg-slate-900 text-white">XII TKJ 3</option>
                     </select>

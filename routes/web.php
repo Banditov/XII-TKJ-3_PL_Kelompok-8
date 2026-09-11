@@ -7,6 +7,8 @@ use App\Livewire\Absent\AbsentIndex;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Equipment\EquipmentIndex;
+use App\Livewire\Equipment\EquipmentCreate;
+use App\Livewire\Equipment\EquipmentEdit;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,3 +25,5 @@ Route::get('/agenda/{id}/edit', AgendaEdit::class)->name('agenda.edit');
 Route::get('/absent', AbsentIndex::class)->name('absent');
 
 Route::get('/equipment', EquipmentIndex::class)->name('equipment');
+Route::get('/equipment/create', EquipmentCreate::class)->name('equipment.create');
+Route::get('/equipment/{id}/edit', EquipmentEdit::class)->name('equipment.edit');

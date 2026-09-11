@@ -253,8 +253,16 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
 
+- Membuat halaman edit/tambah perlengkapan kelas
+</details>
+
+### 11/09/2026 - 0.6.1
+
+<details>
+
 - Memperbaiki halaman perlengkapan kelas
 </details>
+
 
 ### 08/09/2026 - 0.6.0
 
