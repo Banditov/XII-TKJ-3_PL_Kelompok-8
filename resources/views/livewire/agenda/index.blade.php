@@ -1,5 +1,4 @@
-<div 
-    class="glass 4xs:h-[85%] sm:h-[90%] sm:w-full 4xs:w-auto m-15 p-5 rounded-3xl bg-black/20 backdrop-blur-[5px] border border-white/10 shadow-2xl shadow-black/60 4xs:zoom-70 2xs:zoom-75 xs:zoom-80 sm:zoom-70 md:zoom-75 lg:zoom-80 xl:zoom-85 2xl:zoom-85">
+<section>
     <!-- Header -->
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
@@ -7,11 +6,11 @@
             <p class="font-semibold">XII TKJ 3</p>
         </div>
 
-        <button
-            class="flex items-center gap-2 rounded-[14px] border border-white/20 bg-white/5 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+        <a href="{{ route('agenda.create') }}"
+            class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
             <p>Tambah</p>
             <p class="text-2xl leading-none">+</p>
-        </button>
+        </a>
     </header>
 
     <!-- Stats Cards -->
@@ -114,9 +113,9 @@
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <button class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80">
+                            <a href="" class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80">
                                 {!! icon('pencil', 'h-5 w-5') !!}
-                            </button>
+                            </a>
                             <button class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80">
                                 {!! icon('delete', 'h-5 w-5') !!}
                             </button>
@@ -126,4 +125,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

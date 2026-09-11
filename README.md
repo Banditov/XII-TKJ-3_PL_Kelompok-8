@@ -2,7 +2,7 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-0.4.2-red">
+      <img src="https://img.shields.io/badge/GitHub Version-0.6.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -26,6 +26,7 @@
 <!-- - [Instalasi](#instalasi)
 - [Penggunaan](#penggunaan) -->
 - [Arsitektur](#arsitektur)
+- [Fitur Utama](#fitur-utama)
 - [Kontributor](#kontributor)
 - [Lisensi](#lisensi)
 - [Changelog](#changelog)
@@ -173,6 +174,45 @@
 <!-- ## Penggunaan
 ImmaSpark adalah sebuah website tempat siswa bisa menyimpan, membagikan, dan mengembangkan ide-ide kreatif mereka supaya tidak mudah lupa atau hilang begitu saja. Di website ini, siswa dapat membuat postingan ide, berdiskusi lewat komentar, serta memberi vote pada ide siswa lain. Jumlah vote yang didapat akan menunjukkan perkembangan dan ketertarikan pengguna terhadap ide tersebut, sehingga ide-ide yang menarik bisa lebih mudah berkembang dan dikenal banyak orang. Dengan adanya ImmaSpark, siswa memiliki wadah untuk lebih bebas berkreasi, berbagi pendapat, dan saling mendukung dalam mengembangkan ide baru. -->
 
+## Fitur Utama
+<details>
+   <summary>Berikut ini adalah fitur-fitur utama yang terdapat pada setiap page pada website ImmaSpark:</summary>
+
+- Login
+
+   Halaman digunakan untuk login ke dalam akun dan masuk ke dalam halaman utama.
+
+- Logout
+
+   Pengguna dapat logout melalui navbar kiri.
+
+- Absensi
+
+   Pengguna dapat absen dan melihat status absensi yang lain pada hari yang sama.
+
+- Mendata Penggunaan SIM
+
+   Pengguna dapat mengupload foto SIM mereka agar pihak sekolah dapat tahu bahwa pengguna tersebut sudah memiliki SIM. Pengguna juga dapat melihat status SIM pengguna lainnya.
+
+- Mendata Perlengkapan Kelas
+
+   Pengguna dapat mendata kondisi perlengkapan kelas mereka agar apabila terdapat kerusakan, pihak sekolah dapat tahu dan menggantikan perlengkapan tersebut.
+
+- Agenda
+
+   Pengguna-pengguna dapat menambahkan isi agenda untuk kelas mereka semua agar semua orang di kelas tersebut dapat ingat untuk mengerjakan tugas tersebut.
+
+   <details>
+      <summary>Admin Pages</summary>
+
+  - Register User
+
+    Digunakan untuk menambahkan akun.
+
+   </details>
+  
+</details>
+
 ## Arsitektur
 
 <b>-- Front-end Library --</b> <br>
@@ -208,6 +248,23 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
    <summary>September</summary>
+
+### 08/09/2026 - 0.6.0
+
+<details>
+
+- Membuat halaman edit/tambah agenda
+</details>
+
+### 08/09/2026 - 0.5.0
+
+<details>
+
+- Membuat halaman absensi
+- Memperbaiki konsistensi style semua halaman
+- Memperbaiki responsivitas halaman absensi
+- Menambahkan bagian fitur utama pada README
+</details>
 
 ### 05/09/2026 - 0.4.2
 
