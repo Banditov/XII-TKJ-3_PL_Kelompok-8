@@ -2,7 +2,7 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-0.6.0-red">
+      <img src="https://img.shields.io/badge/GitHub Version-0.7.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -249,6 +249,13 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>September</summary>
 
+### 11/09/2026 - 0.7.0
+
+<details>
+
+- Memperbaiki halaman perlengkapan kelas
+</details>
+
 ### 08/09/2026 - 0.6.0
 
 <details>
@@ -264,6 +271,7 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 - Memperbaiki konsistensi style semua halaman
 - Memperbaiki responsivitas halaman absensi
 - Menambahkan bagian fitur utama pada README
+- Membuat halaman perlengkapan kelas
 </details>
 
 ### 05/09/2026 - 0.4.2
