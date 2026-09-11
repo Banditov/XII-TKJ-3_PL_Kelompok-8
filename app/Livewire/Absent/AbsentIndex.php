@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Livewire\Absent;
 
+use App\Data\AbsentData;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -9,43 +9,45 @@ use Livewire\Component;
 class AbsentIndex extends Component
 {
     public string $selectedDate;
-
     public string $myStatus = 'Belum Absen';
-
-    public array $students = [
-        ['nama' => 'Christopher Vittorio C.', 'nis' => '2024001', 'status' => 'hadir', 'reason' => null],
-        ['nama' => 'Michelle Nathaliu', 'nis' => '2024002', 'status' => 'izin', 'reason' => 'Sakit'],
-        ['nama' => 'Valentino', 'nis' => '2024003', 'status' => 'belum', 'reason' => null],
-    ];
+    public array $students = [];
 
     public function mount(): void
     {
         $this->selectedDate = now()->format('Y-m-d');
+        $this->students = AbsentData::students();
     }
 
     public function getBanyakSiswaProperty(): int
     {
-        return count($this->students);
+        return AbsentData::totalStudents();
     }
 
     public function getSudahAbsenProperty(): int
     {
-        return collect($this->students)->whereIn('status', ['hadir', 'izin'])->count();
+        return AbsentData::attendedCount();
     }
 
     public function getBelumAbsenProperty(): int
     {
-        return collect($this->students)->where('status', 'belum')->count();
+        return AbsentData::notAttendedCount();
     }
 
     public function absenMasuk(): void
     {
         $this->myStatus = 'Hadir';
+        session()->flash('success', 'Berhasil absen masuk!');
     }
 
     public function ajukanIzin(): void
     {
         $this->myStatus = 'Izin';
+        session()->flash('success', 'Pengajuan izin terkirim!');
+    }
+
+    public function updatedSelectedDate(): void
+    {
+        $this->students = AbsentData::students();
     }
 
     public function render()
