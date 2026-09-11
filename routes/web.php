@@ -6,6 +6,7 @@ use App\Livewire\Agenda\AgendaEdit;
 use App\Livewire\Absent\AbsentIndex;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Perlengkapan\PerlengkapanIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,3 +21,5 @@ Route::get('/agenda/create', AgendaCreate::class)->name('agenda.create');
 Route::get('/agenda/{id}/edit', AgendaEdit::class)->name('agenda.edit');
 
 Route::get('/absent', AbsentIndex::class)->name('absent');
+
+Route::get('/perlengkapan', PerlengkapanIndex::class)->name('perlengkapan');
