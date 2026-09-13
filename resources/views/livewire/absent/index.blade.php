@@ -100,7 +100,7 @@
                 <div
                     class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
                     <div class="flex flex-col gap-1">
-                        <p class="text-xl font-semibold">{{ $student['nama'] }} &mdash; {{ $student['nis'] }}</p>
+                        <p class="text-xl font-semibold">{{ $student['name'] }} &mdash; {{ $student['nis'] }}</p>
                         @if ($student['status'] === 'izin')
                             <p class="text-white/50">Alasan: {{ $student['reason'] }}</p>
                         @endif

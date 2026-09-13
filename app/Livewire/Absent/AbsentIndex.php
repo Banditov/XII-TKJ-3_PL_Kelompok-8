@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Livewire\Absent;
 
-use App\Data\AbsentData;
+use App\Data\StudentData;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -15,22 +16,22 @@ class AbsentIndex extends Component
     public function mount(): void
     {
         $this->selectedDate = now()->format('Y-m-d');
-        $this->students = AbsentData::students();
+        $this->students = StudentData::all();
     }
 
     public function getBanyakSiswaProperty(): int
     {
-        return AbsentData::totalStudents();
+        return StudentData::total();
     }
 
     public function getSudahAbsenProperty(): int
     {
-        return AbsentData::attendedCount();
+        return StudentData::attendedCount();
     }
 
     public function getBelumAbsenProperty(): int
     {
-        return AbsentData::notAttendedCount();
+        return StudentData::notAttendedCount();
     }
 
     public function absenMasuk(): void
@@ -47,7 +48,7 @@ class AbsentIndex extends Component
 
     public function updatedSelectedDate(): void
     {
-        $this->students = AbsentData::students();
+        $this->students = StudentData::all();
     }
 
     public function render()

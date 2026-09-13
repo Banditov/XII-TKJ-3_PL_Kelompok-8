@@ -1,72 +1,90 @@
 <?php
 namespace App\Data;
 
-class AbsentData
+class StudentData
 {
-    public static function students(): array
+    public static function all(): array
     {
         return [
             [
-                'nama' => 'Christopher Vittorio C.',
+                'name' => 'Christopher Vittorio C.',
                 'nis' => '2024001',
                 'status' => 'hadir',
                 'reason' => null,
+                'hasSim' => true,
             ],
             [
-                'nama' => 'Michelle Nathaliu',
+                'name' => 'Michelle Nathaliu',
                 'nis' => '2024002',
                 'status' => 'izin',
                 'reason' => 'Sakit',
+                'hasSim' => false,
             ],
             [
-                'nama' => 'Valentino',
+                'name' => 'Valentino',
                 'nis' => '2024003',
                 'status' => 'belum',
                 'reason' => null,
+                'hasSim' => true,
             ],
             [
-                'nama' => 'Andreas Wijaya',
+                'name' => 'Andreas Wijaya',
                 'nis' => '2024004',
                 'status' => 'hadir',
                 'reason' => null,
+                'hasSim' => false,
             ],
             [
-                'nama' => 'Bella Kusuma',
+                'name' => 'Bella Kusuma',
                 'nis' => '2024005',
                 'status' => 'izin',
                 'reason' => 'Acara keluarga',
+                'hasSim' => true,
             ],
             [
-                'nama' => 'Cindy Halim',
+                'name' => 'Cindy Halim',
                 'nis' => '2024006',
                 'status' => 'belum',
                 'reason' => null,
+                'hasSim' => false,
             ],
         ];
     }
 
-    public static function totalStudents(): int
-    {
-        return count(self::students());
-    }
+    // === Absensi helpers ===
 
     public static function attendedCount(): int
     {
-        return collect(self::students())
-            ->whereIn('status', ['hadir', 'izin'])
-            ->count();
+        return collect(self::all())->whereIn('status', ['hadir', 'izin'])->count();
     }
 
     public static function notAttendedCount(): int
     {
-        return collect(self::students())
-            ->where('status', 'belum')
-            ->count();
+        return collect(self::all())->where('status', 'belum')->count();
+    }
+
+    // === SIM helpers ===
+
+    public static function hasSimCount(): int
+    {
+        return collect(self::all())->where('hasSim', true)->count();
+    }
+
+    public static function noSimCount(): int
+    {
+        return collect(self::all())->where('hasSim', false)->count();
+    }
+
+    // === Common helpers ===
+
+    public static function total(): int
+    {
+        return count(self::all());
     }
 
     public static function find(string $nis): ?array
     {
-        foreach (self::students() as $student) {
+        foreach (self::all() as $student) {
             if ($student['nis'] === $nis) {
                 return $student;
             }

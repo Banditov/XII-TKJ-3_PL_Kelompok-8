@@ -2,7 +2,7 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-0.7.0-red">
+      <img src="https://img.shields.io/badge/GitHub Version-0.8.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -211,11 +211,13 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>September</summary>
 
-### 13/09/2026 - 0.7.0
+### 13/09/2026 - 0.8.0
 
 <details>
 
 - Memperbarui README
+- Menggabungkan data dummy absen dengan SIM
+- Membuat halaman pendataan penggunaan SIM
 </details>
 
 ### 11/09/2026 - 0.7.0
