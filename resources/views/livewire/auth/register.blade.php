@@ -67,10 +67,10 @@
                     <button type="button" @click="show = !show"
                         class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white/70 transition-colors">
                         <span x-show="!show">
-                            {!! icon('eye', 'h-5 w-5 text-white/30') !!}
+                            {!! icon('eye-slash', 'h-5 w-5 text-white/30') !!}
                         </span>
                         <span x-show="show" x-cloak>
-                            {!! icon('eye-slash', 'h-5 w-5 text-white/30') !!}
+                            {!! icon('eye', 'h-5 w-5 text-white/30') !!}
                         </span>
                     </button>
                 </div>
