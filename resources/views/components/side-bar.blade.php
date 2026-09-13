@@ -17,8 +17,8 @@
                 class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'equipment' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('pencil', 'h-8 w-8') !!}
             </a>
-            <a href="" 
-                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'placeholder' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
+            <a href="{{ route('driver') }}" 
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'driver' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('id', 'h-8 w-8') !!}
             </a>
         </nav>
@@ -52,8 +52,8 @@
         {!! icon('pencil', 'aspect-square w-[50%]') !!}
     </a>
     
-    <a href="" 
-        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'placeholder' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
+    <a href="{{ route('driver') }}" 
+        class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'driver' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('id', 'aspect-square w-[50%]') !!}
     </a>
     

@@ -6,9 +6,10 @@ use App\Livewire\Agenda\AgendaEdit;
 use App\Livewire\Absent\AbsentIndex;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
-use App\Livewire\Equipment\EquipmentIndex;
 use App\Livewire\Equipment\EquipmentCreate;
 use App\Livewire\Equipment\EquipmentEdit;
+use App\Livewire\Equipment\EquipmentIndex;
+use App\Livewire\Driver\DriverIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,9 +17,10 @@ Route::get('/', function () {
 });
 
 Route::get('/login', Login::class)->name('login');
+Route::get('/agenda', AgendaIndex::class)->name('agenda');
+
 Route::get('/admin/register', Register::class)->name('admin.register');
 
-Route::get('/agenda', AgendaIndex::class)->name('agenda');
 Route::get('/agenda/create', AgendaCreate::class)->name('agenda.create');
 Route::get('/agenda/{id}/edit', AgendaEdit::class)->name('agenda.edit');
 
@@ -27,3 +29,5 @@ Route::get('/absent', AbsentIndex::class)->name('absent');
 Route::get('/equipment', EquipmentIndex::class)->name('equipment');
 Route::get('/equipment/create', EquipmentCreate::class)->name('equipment.create');
 Route::get('/equipment/{id}/edit', EquipmentEdit::class)->name('equipment.edit');
+
+Route::get('/driver', DriverIndex::class)->name('driver');
