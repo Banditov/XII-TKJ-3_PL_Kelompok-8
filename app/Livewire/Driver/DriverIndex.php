@@ -1,10 +1,11 @@
 <?php
+namespace App\Livewire\Driver;
 
-namespace App\Livewire\Sim;
-
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class SimIndex extends Component
+#[Layout('layouts.app', ['active' => 'driver'])]
+class DriverIndex extends Component
 {
     public array $stats = [
         ['label' => 'Banyak Siswa', 'value' => 34, 'color' => 'blue', 'icon' => 'group'],
@@ -20,6 +21,6 @@ class SimIndex extends Component
 
     public function render()
     {
-        return view('livewire.sim.index')->layout('layouts.app');
+        return view('livewire.driver.index');
     }
 }
