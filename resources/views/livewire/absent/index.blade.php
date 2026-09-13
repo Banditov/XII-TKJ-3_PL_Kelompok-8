@@ -18,7 +18,14 @@
         </div>
     </header>
 
-    <!-- Status Absensi Saya Hari Ini -->
+    {{-- Success Message --}}
+    @if (session()->has('success'))
+        <div class="mb-6 rounded-xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-emerald-300">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Status Absensi Saya -->
     <div
         class="mb-7 flex items-center justify-between 4xs:flex-col sm:flex-row gap-5 rounded-[18px] border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20 backdrop-blur-sm">
         <div class="flex items-center gap-5">

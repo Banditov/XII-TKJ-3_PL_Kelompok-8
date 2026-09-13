@@ -57,15 +57,13 @@ export default class GlassEffect {
         if (!canvas) {
             canvas = document.createElement('canvas');
             canvas.className = 'glass-canvas';
-            card.appendChild(canvas);
+            document.body.appendChild(canvas);
             injected = true;
         }
 
-        canvas.style.position = 'absolute';
-        canvas.style.inset = '0';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
+        canvas.style.position = 'fixed';
         canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '1';
         canvas.style.borderRadius = 'inherit';
 
         const instance = {
@@ -82,7 +80,19 @@ export default class GlassEffect {
             currentY: 0.5,
             hovering: false,
             radii: { tl: 0, tr: 0, br: 0, bl: 0 },
+            cardRect: { top: 0, left: 0, width: 0, height: 0 },
+            visible: true,
         };
+
+        if ('IntersectionObserver' in window) {
+            instance.io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    instance.visible = entry.isIntersecting;
+                    instance.canvas.style.display = entry.isIntersecting ? 'block' : 'none';
+                });
+            }, { threshold: 0 });
+            instance.io.observe(card);
+        }
 
         card.addEventListener('mouseenter', () => { instance.hovering = true; });
         card.addEventListener('mouseleave', () => { instance.hovering = false; });
@@ -95,8 +105,21 @@ export default class GlassEffect {
         const rect = instance.card.getBoundingClientRect();
         instance.width = rect.width;
         instance.height = rect.height;
+
+        instance.cardRect = {
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+        };
+
         instance.canvas.width = Math.max(1, rect.width * instance.dpr);
         instance.canvas.height = Math.max(1, rect.height * instance.dpr);
+
+        instance.canvas.style.top = `${rect.top}px`;
+        instance.canvas.style.left = `${rect.left}px`;
+        instance.canvas.style.width = `${rect.width}px`;
+        instance.canvas.style.height = `${rect.height}px`;
 
         const computedStyle = getComputedStyle(instance.card);
         instance.radii = this.parseBorderRadius(computedStyle, instance.width, instance.height);
@@ -152,19 +175,56 @@ export default class GlassEffect {
     }
 
     loop() {
-        this.instances.forEach((instance) => this.draw(instance));
+        this.instances.forEach((instance) => {
+            if (instance.visible) {
+                this.updatePosition(instance);
+                this.draw(instance);
+            }
+        });
         this.raf = requestAnimationFrame(this.loop);
     }
 
+    updatePosition(instance) {
+        const rect = instance.card.getBoundingClientRect();
+
+        if (
+            rect.top === instance.cardRect.top &&
+            rect.left === instance.cardRect.left &&
+            rect.width === instance.cardRect.width &&
+            rect.height === instance.cardRect.height
+        ) {
+            return;
+        }
+
+        instance.cardRect = {
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+        };
+
+        instance.canvas.style.top = `${rect.top}px`;
+        instance.canvas.style.left = `${rect.left}px`;
+        instance.canvas.style.width = `${rect.width}px`;
+        instance.canvas.style.height = `${rect.height}px`;
+
+        if (instance.width !== rect.width || instance.height !== rect.height) {
+            instance.width = rect.width;
+            instance.height = rect.height;
+            instance.canvas.width = Math.max(1, rect.width * instance.dpr);
+            instance.canvas.height = Math.max(1, rect.height * instance.dpr);
+            instance.ctx.setTransform(instance.dpr, 0, 0, instance.dpr, 0, 0);
+        }
+    }
+
     draw(instance) {
-        const { ctx, width: w, height: h, radii } = instance;
+        const { ctx, width: w, height: h, radii, cardRect } = instance;
         if (!w || !h) return;
 
-        const rect = instance.card.getBoundingClientRect();
         const ease = instance.hovering ? this.options.ease : this.options.idleReturn;
 
-        let toX = (this.pointer.x - rect.left) / rect.width;
-        let toY = (this.pointer.y - rect.top) / rect.height;
+        let toX = (this.pointer.x - cardRect.left) / cardRect.width;
+        let toY = (this.pointer.y - cardRect.top) / cardRect.height;
 
         if (!this.options.trackOutside) {
             toX = instance.hovering
@@ -299,10 +359,17 @@ export default class GlassEffect {
         this.ro = null;
 
         this.instances.forEach((instance) => {
+            if (instance.io) {
+                instance.io.disconnect();
+            }
+
             if (instance.injected) {
                 instance.canvas.remove();
             } else {
                 instance.ctx.clearRect(0, 0, instance.canvas.width, instance.canvas.height);
+                if (instance.canvas.parentElement === document.body) {
+                    instance.card.appendChild(instance.canvas);
+                }
             }
             delete instance.card.dataset.glassMounted;
         });
