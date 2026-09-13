@@ -1,16 +1,16 @@
 <img src=".github/images/banner/banner.png">
 <br>
 <div align="center">
-   <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
+   <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/GitHub Version-0.7.0-red">
    </a>
-   <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#changelog">
+   <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
    </a> --><br>
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-blue.svg">
    </a>
-   <a href="https://github.com/Banditov/XII-TKJ-3_PWL_Kelompok-8?tab=readme-ov-file#kontributor">
+   <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#kontributor">
       <img src="https://img.shields.io/badge/Contributor-3-yellow">
    </a>
    <!-- <a href="http://immaspark.page.gd">
@@ -23,20 +23,31 @@
 <details>
    <summary>Tekan untuk Buka</summary>
 
-<!-- - [Instalasi](#instalasi)
-- [Penggunaan](#penggunaan) -->
-- [Arsitektur](#arsitektur)
+- [Deskripsi](#deskripsi)
+- [Prasyarat](#prasyarat)
+- [Instalasi](#instalasi)
 - [Fitur Utama](#fitur-utama)
+- [Penggunaan](#penggunaan)
+- [Arsitektur](#arsitektur)
 - [Kontributor](#kontributor)
 - [Lisensi](#lisensi)
 - [Changelog](#changelog)
 - [Link](#link)
 </details>
 
-<!-- ## Instalasi
+## Deskripsi
+Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang terdapat di sekolah SMK Kristen Immanuel Pontianak agar siswa dapat berkomunikasi dengan lebih gampang dengan pihak sekolah. Website ini menyediakan fitur agenda per kelas, absensi siswa, daftar perlengkapan kelas, dan daftar siswa-siswa yang sudah memiliki SIM. Nama Logimm sendiri adalah gabungan dari Log yang merupakan catatan digital dan Immanuel untuk merepresentasikan nama sekolah.
+
+
+## Prasyarat
+- PHP versi >= 8.5
+- Visual Studio Code
+- Laragon versi terbaru
+
+## Instalasi
 
 <details>
-   <summary>Instalasi</summary>
+   <summary>Tekan untuk Buka</summary>
 
 ### Step 1
 
@@ -45,97 +56,17 @@
 
    <details>
       <summary>Unstable Version</summary>
-1. Download repository ini (Cari tombol code warna hijau di bagian atas terus tekan "Download ZIP").
-      <details>
-         <summary>Step 1A-1</summary>
-         <img src=".github/images/tutorial/A1A-1.png">
-      </details>
-2. Ekstrak file tersebut.
-      <details>
-         <summary>Step 1A-2</summary>
-         <img src=".github/images/tutorial/A1A-2.png">
-      </details>
-3. Pindahkan folder yang telah diekstrak ke directory "C:\laragon\www\". Folder yang dipindahkan seharusnya dapat langsung melihat isi dari websitenya, apabila dalam folder yang dipindahkan terdapat sebuah folder lagi, keluarkan semua isi dari websitenya keluar dari foldernya.
-      <details>
-         <summary>Step 1A-3</summary>
-         <img src=".github/images/tutorial/B1A-3--B-4.png">
-      </details>
-4. Buka Laragon.
-      <details>
-         <summary>Step 1A-4</summary>
-         <img src=".github/images/tutorial/B1A-4--B-5.png">
-      </details>
-5. Tekan "Start All" dan tekan "Database".
-      <details>
-         <summary>Step 1A-5</summary>
-         <img src=".github/images/tutorial/B1A-5--B-6.png">
-      </details>
-6. Login ke phpMyAdmin menggunakan username "root" dan password kosong.
-      <details>
-         <summary>Step 1A-6</summary>
-         <img src=".github/images/tutorial/B1A-6--B-7.png">
-      </details>
-7. Buat database dengan nama "immaspark".
-      <details>
-         <summary>Step 1A-7</summary>
-         <img src=".github/images/tutorial/B1A-7--B-8.png">
-      </details>
-8. Import file "immaspark.sql" yang terdapat di dalam folder yang telah dipindahkan.
-      <details>
-         <summary>Step 1A-8</summary>
-         <img src=".github/images/tutorial/B1A-8--B-9.png">
-      </details>
-9. Lanjut ke Step 2.
+1. Download repository ini (Cari tombol code warna hijau di bagian atas terus tekan "Download ZIP").<br>
+2. Ekstrak file tersebut.<br>
+3. Lanjut ke step selanjutnya.
    </details>
 <br>
    <details>
       <summary>Stable Version</summary>
-1. Buka page <a href="https://github.com/Banditov/XI-TKJ-3_PWL_Kelompok-8/releases">Releases</a> dari repository ini.
-      <details>
-         <summary>Step 1B-1</summary>
-         <img src=".github/images/tutorial/A1B-1.png">
-      </details>
-2. Pilih salah satu release, tekan "Assets", dan tekan "Source code (zip)".
-      <details>
-         <summary>Step 1B-2</summary>
-         <img src=".github/images/tutorial/A1B-2.png">
-      </details>
-3. Ekstrak file tersebut.
-      <details>
-         <summary>Step 1B-3</summary>
-         <img src=".github/images/tutorial/A1B-3.png">
-      </details>
-4. Pindahkan folder yang telah diekstrak ke directory "C:\laragon\www\". Folder yang dipindahkan seharusnya dapat langsung melihat isi dari websitenya, apabila dalam folder yang dipindahkan terdapat sebuah folder lagi, keluarkan semua isi dari websitenya keluar dari foldernya.
-      <details>
-         <summary>Step 1B-4</summary>
-         <img src=".github/images/tutorial/B1A-3--B-4.png">
-      </details>
-5. Buka Laragon.
-      <details>
-         <summary>Step 1B-5</summary>
-         <img src=".github/images/tutorial/B1A-4--B-5.png">
-      </details>
-6. Tekan "Start All" dan tekan "Database".
-      <details>
-         <summary>Step 1B-6</summary>
-         <img src=".github/images/tutorial/B1A-5--B-6.png">
-      </details>
-7. Login ke phpMyAdmin menggunakan username "root" dan password kosong.
-      <details>
-         <summary>Step 1B-7</summary>
-         <img src=".github/images/tutorial/B1A-6--B-7.png">
-      </details>
-8. Buat database dengan nama "immaspark".
-      <details>
-         <summary>Step 1B-8</summary>
-         <img src=".github/images/tutorial/B1A-7--B-8.png">
-      </details>
-9. Import file "immaspark.sql" yang terdapat di dalam folder yang telah dipindahkan.
-      <details>
-         <summary>Step 1B-9</summary>
-         <img src=".github/images/tutorial/B1A-8--B-9.png">
-      </details>
-10. Lanjut ke Step 2.
+1. Buka page <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8/releases">Releases</a> dari repository ini.<br>
+2. Pilih salah satu release, tekan "Assets", dan tekan "Source code (zip)".<br>
+3. Ekstrak file tersebut.<br>
+4. Lanjut ke step selanjutnya.
    </details>
 </details>
 
@@ -143,77 +74,108 @@
 
 <details>
    <summary>Step 2</summary>
-1. Buka terminal di Laragon.
-      <details>
-         <summary>Step 2-1</summary>
-         <img src=".github/images/tutorial/B2-1.png">
-      </details>
-2. Ketikkan "cd (Nama folder yang diekstrak tadi)". Apabila lupa, ketikkan "ls" dan cari nama folder yang sesuai.
-      <details>
-         <summary>Step 2-2</summary>
-         <img src=".github/images/tutorial/B2-2.png">
-      </details>
-3. Ketikkan "php -S localhost:5500 -t public" dan tekan link yang diberikan sambil menekan ctrl kiri.
-      <details>
-         <summary>Step 2-3</summary>
-         <img src=".github/images/tutorial/B2-3.png">
-      </details>
-   <h3 align="center">Selesai!</h3>
-</details>
-</details>
-</details>
-<br>
-<details>
-   <summary>Hosted</summary>
-<a href="http://immaspark.page.gd">Tekan aku!</a><br>
 
+1. Pindahkan folder yang telah diekstrak ke directory proyek-proyek laragon Anda, secara default berada di `C:\laragon\www`. Folder yang dipindahkan seharusnya dapat langsung melihat isi dari websitenya, apabila dalam folder yang dipindahkan terdapat sebuah folder lagi, keluarkan semua isi dari websitenya keluar dari foldernya.<br>
+2. Buka dan jalankan laragon terus buka terminalnya.<br>
+3. Pindah ke directory proyek yang telah diinstal.<br>
+4. Instal dependencies proyek menggunakan command di bawah.
+`composer install` & `npm install`<br>
+5. Setelah semua sudah selesai, masuk ke dalam folder proyek (gunakan command `code .`), terus copy-paste file `.env.example` dan ganti namanya menjadi `.env`.<br>
+6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`.<br>
+7. Setelah database sudah dibuat, jalankan command `composer run dev` dan tekan link dengan label APP_URL.<br>
+8. Selesai :D
 </details>
 </details>
-</details> -->
-
-<!-- ## Penggunaan
-ImmaSpark adalah sebuah website tempat siswa bisa menyimpan, membagikan, dan mengembangkan ide-ide kreatif mereka supaya tidak mudah lupa atau hilang begitu saja. Di website ini, siswa dapat membuat postingan ide, berdiskusi lewat komentar, serta memberi vote pada ide siswa lain. Jumlah vote yang didapat akan menunjukkan perkembangan dan ketertarikan pengguna terhadap ide tersebut, sehingga ide-ide yang menarik bisa lebih mudah berkembang dan dikenal banyak orang. Dengan adanya ImmaSpark, siswa memiliki wadah untuk lebih bebas berkreasi, berbagi pendapat, dan saling mendukung dalam mengembangkan ide baru. -->
+</details>
+</details>
 
 ## Fitur Utama
 <details>
-   <summary>Berikut ini adalah fitur-fitur utama yang terdapat pada setiap page pada website ImmaSpark:</summary>
+   <summary>Tekan untuk Buka</summary>
 
-- Login
+- **Login**
 
    Halaman digunakan untuk login ke dalam akun dan masuk ke dalam halaman utama.
 
-- Logout
+- **Logout**
 
-   Pengguna dapat logout melalui navbar kiri.
+   Pengguna dapat logout melalui navbar kiri bawah.
 
-- Absensi
+- **Absensi**
 
    Pengguna dapat absen dan melihat status absensi yang lain pada hari yang sama.
 
-- Mendata Penggunaan SIM
+- **Mendata Penggunaan SIM**
 
    Pengguna dapat mengupload foto SIM mereka agar pihak sekolah dapat tahu bahwa pengguna tersebut sudah memiliki SIM. Pengguna juga dapat melihat status SIM pengguna lainnya.
 
-- Mendata Perlengkapan Kelas
+- **Mendata Perlengkapan Kelas**
 
    Pengguna dapat mendata kondisi perlengkapan kelas mereka agar apabila terdapat kerusakan, pihak sekolah dapat tahu dan menggantikan perlengkapan tersebut.
 
-- Agenda
+- **Agenda**
 
    Pengguna-pengguna dapat menambahkan isi agenda untuk kelas mereka semua agar semua orang di kelas tersebut dapat ingat untuk mengerjakan tugas tersebut.
 
    <details>
       <summary>Admin Pages</summary>
 
-  - Register User
+  - **Register User**
 
-    Digunakan untuk menambahkan akun.
+      Digunakan untuk menambahkan akun.
 
    </details>
   
 </details>
 
-## Arsitektur
+## Penggunaan
+
+<details>
+<summary>Tekan untuk Buka</summary>
+
+- **Login**
+
+  Ketika website dibuka, user akan menemukan halaman login terlebih dahulu. User hanya perlu memasukkan email dan password mereka untuk login.
+
+- **Navigasi**
+
+  Setelah berhasil login, user akan diarahkan ke halaman utama. Navigasi dapat dilakukan melalui sidebar di sisi kiri pada perangkat desktop, atau melalui navbar di bagian bawah layar pada perangkat mobile. Setiap ikon pada navigasi mewakili satu halaman: Absensi, Agenda, Perlengkapan, dan Profil.
+
+- **Absensi**
+
+  Halaman ini menampilkan daftar kehadiran siswa untuk tanggal yang dipilih. User dapat mengubah tanggal melalui tombol Pilih Tanggal di bagian kanan atas. Di bagian atas halaman terdapat status absensi pribadi user, dengan tombol Absen Masuk dan Pengajuan Izin. Di bawahnya terdapat kartu statistik yang menampilkan jumlah total siswa, jumlah yang sudah absen, dan jumlah yang belum absen. Daftar siswa ditampilkan di bagian bawah beserta status masing-masing.
+
+- **Agenda**
+
+  Halaman ini menampilkan daftar agenda yang terbagi menjadi dua bagian: Tugas Sekarang dan Sudah Lewat. Setiap item menampilkan judul, deskripsi, tanggal, dan waktu. Untuk menambahkan agenda baru, user dapat menekan tombol Tambah di bagian kanan atas. Setiap item agenda memiliki tombol edit dan hapus.
+
+- **Menambah Agenda**
+
+  Form ini digunakan untuk membuat agenda baru. User perlu mengisi judul agenda, deskripsi, waktu mulai dan selesai, serta tanggal. Setelah semua terisi, tekan tombol Simpan untuk menyimpan agenda. Tombol Batal akan mengembalikan user ke halaman daftar agenda.
+
+- **Edit Agenda**
+
+  Form ini muncul ketika user menekan tombol edit pada salah satu item agenda. Seluruh data agenda akan dimuat secara otomatis ke dalam form. User dapat mengubah data yang diperlukan, lalu menekan tombol Perbarui untuk menyimpan perubahan.
+
+- **Perlengkapan**
+
+  Halaman ini menampilkan daftar seluruh perlengkapan kelas beserta jumlahnya. Setiap item dilengkapi tombol untuk menambah atau mengurangi jumlah secara langsung. Terdapat juga tombol edit dan hapus pada setiap item. Untuk menambahkan perlengkapan baru, user dapat menekan tombol Tambah di bagian kanan atas.
+
+- **Menambah Perlengkapan**
+
+  Form ini digunakan untuk menambahkan perlengkapan baru. User perlu mengisi nama perlengkapan, jumlah total, dan catatan tambahan jika diperlukan. Tombol Simpan akan menyimpan data perlengkapan baru.
+
+- **Edit Perlengkapan**
+
+  Form ini muncul ketika user menekan tombol edit pada salah satu item perlengkapan. Data perlengkapan akan dimuat secara otomatis. User dapat mengubah nama, jumlah, atau catatan, lalu menekan tombol Perbarui untuk menyimpan perubahan.
+
+- **Logout**
+
+  Untuk keluar dari akun, user dapat menekan tombol Logout yang terdapat di bagian bawah sidebar pada desktop, atau di ujung kanan navbar pada mobile.
+
+</details>
+
+## Teknologi
 
 <b>-- Front-end Library --</b> <br>
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)
@@ -249,11 +211,21 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>September</summary>
 
+### 13/09/2026 - 0.7.0
+
+<details>
+
+- Memperbarui README
+</details>
+
 ### 11/09/2026 - 0.7.0
 
 <details>
 
 - Membuat halaman edit/tambah perlengkapan kelas
+- Membuat dummy data agar dapat diview
+- Memperbaiki class glass yang mengikuti scroll
+- Memperbaiki loading page lambat
 </details>
 
 ### 11/09/2026 - 0.6.1
