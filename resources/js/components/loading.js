@@ -19,16 +19,11 @@ function loadingScreen() {
 
         initLivewireLoading() {
             if (typeof Livewire !== 'undefined') {
-                Livewire.hook('request', () => {
+                Livewire.hook('request', ({ succeed, fail }) => {
                     this.showLoader();
-                });
 
-                Livewire.hook('message.received', () => {
-                    this.hideLoader();
-                });
-
-                Livewire.hook('message.failed', () => {
-                    this.hideLoader();
+                    succeed(() => this.hideLoader());
+                    fail(() => this.hideLoader());
                 });
             }
         },

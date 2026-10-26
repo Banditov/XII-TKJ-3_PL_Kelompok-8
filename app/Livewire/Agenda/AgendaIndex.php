@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Livewire\Agenda;
 
-use App\Data\AgendaData;
+use App\Models\Agenda;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -9,8 +10,11 @@ use Livewire\Component;
 class AgendaIndex extends Component
 {
     public array $tasksNow = [];
+
     public array $tasksToday = [];
+
     public array $lateTasks = [];
+
     public array $upcomingTasks = [];
 
     public function mount(): void
@@ -20,15 +24,24 @@ class AgendaIndex extends Component
 
     public function loadAgenda(): void
     {
-        $this->tasksToday = AgendaData::today();
-        $this->upcomingTasks = AgendaData::upcoming();
-        $this->lateTasks = AgendaData::late();
+        $today = now()->toDateString();
+        $toArray = static fn ($query): array => $query
+            ->orderBy('date')
+            ->orderBy('time')
+            ->get()
+            ->toArray();
 
+        $this->tasksToday = $toArray(Agenda::query()->whereDate('date', $today));
+        $this->upcomingTasks = $toArray(Agenda::query()->whereDate('date', '>', $today));
+        $this->lateTasks = $toArray(Agenda::query()->whereDate('date', '<', $today));
         $this->tasksNow = array_merge($this->tasksToday, $this->upcomingTasks);
     }
 
     public function delete(int $id): void
     {
+        Agenda::findOrFail($id)->delete();
+        $this->loadAgenda();
+
         session()->flash('success', 'Agenda berhasil dihapus!');
     }
 

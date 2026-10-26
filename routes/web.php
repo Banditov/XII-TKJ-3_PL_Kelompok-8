@@ -12,9 +12,7 @@ use App\Livewire\Equipment\EquipmentIndex;
 use App\Livewire\Driver\DriverIndex;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::get('/', Login::class)->name('login');
 
 Route::get('/login', Login::class)->name('login');
 Route::get('/agenda', AgendaIndex::class)->name('agenda');

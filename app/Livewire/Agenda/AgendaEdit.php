@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Livewire\Agenda;
 
-use App\Data\AgendaData;
+use App\Models\Agenda;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -9,51 +10,62 @@ use Livewire\Component;
 class AgendaEdit extends Component
 {
     public ?int $agendaId = null;
-    public $title = '';
-    public $description = '';
-    public $date = '';
-    public $time = '';
 
-    protected $rules = [
-        'title' => 'required|min:3|max:255',
-        'description' => 'nullable|max:1000',
-        'date' => 'required|date',
-        'time' => 'required',
-    ];
+    public string $title = '';
 
-    protected $messages = [
-        'title.required' => 'Judul agenda wajib diisi.',
-        'title.min' => 'Judul minimal 3 karakter.',
-        'date.required' => 'Tanggal wajib diisi.',
-        'time.required' => 'Waktu wajib diisi.',
-    ];
+    public string $description = '';
+
+    public string $date = '';
+
+    public string $time = '';
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'string', 'min:3', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'date' => ['required', 'date_format:Y-m-d'],
+            'time' => ['required', 'date_format:H:i'],
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'title.required' => 'Judul agenda wajib diisi.',
+            'title.min' => 'Judul minimal 3 karakter.',
+            'date.required' => 'Tanggal wajib diisi.',
+            'time.required' => 'Waktu wajib diisi.',
+        ];
+    }
 
     public function mount(int $id): void
     {
         $this->agendaId = $id;
 
-        $agenda = AgendaData::find($id);
+        $agenda = Agenda::findOrFail($id);
 
-        if (!$agenda) {
-            abort(404, 'Agenda tidak ditemukan.');
-        }
-
-        $this->title = $agenda['title'];
-        $this->description = $agenda['description'] ?? '';
-        $this->date = $agenda['date'];
-        $this->time = $agenda['time'];
+        $this->title = $agenda->title;
+        $this->description = $agenda->description ?? '';
+        $this->date = $agenda->date;
+        $this->time = substr($agenda->time, 0, 5);
     }
 
     public function update(): void
     {
-        $this->validate();
+        $agenda = Agenda::findOrFail($this->agendaId);
+        $agenda->update($this->validate());
 
-        $this->redirect(route('agenda.index'));
+        session()->flash('success', 'Agenda berhasil diperbarui!');
+        $this->redirect(route('agenda'));
     }
 
     public function delete(): void
     {
-        $this->redirect(route('agenda.index'));
+        Agenda::findOrFail($this->agendaId)->delete();
+
+        session()->flash('success', 'Agenda berhasil dihapus!');
+        $this->redirect(route('agenda'));
     }
 
     public function render()
