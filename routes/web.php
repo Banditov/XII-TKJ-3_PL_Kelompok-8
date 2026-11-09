@@ -12,8 +12,12 @@ use App\Livewire\Equipment\EquipmentEdit;
 use App\Livewire\Equipment\EquipmentIndex;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleController;
 
 Route::get('/', fn () => redirect('/login'));
+
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 Route::middleware('guest:student,teacher')->group(function () {
     Route::get('/login', Login::class)->name('login');
