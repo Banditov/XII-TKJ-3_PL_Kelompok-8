@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Auth;
 
 use Livewire\Component;
@@ -11,56 +10,52 @@ class Login extends Component
     public $password = '';
     public $remember = false;
 
-    private $dummyUsers = [
-        'admin@example.com' => [
-            'password' => 'password123',
-            'name' => 'Admin User',
-            'role' => 'admin',
-        ],
-        'user@example.com' => [
-            'password' => 'password123',
-            'name' => 'Regular User',
-            'role' => 'user',
-        ],
-        'teacher@example.com' => [
-            'password' => 'password123',
-            'name' => 'Teacher User',
-            'role' => 'teacher',
-        ],
-    ];
-
     protected $rules = [
         'email' => 'required|email',
         'password' => 'required|min:6',
+    ];
+
+    protected $messages = [
+        'email.required' => 'Email wajib diisi.',
+        'email.email' => 'Format email tidak valid.',
+        'password.required' => 'Password wajib diisi.',
+        'password.min' => 'Password minimal 6 karakter.',
     ];
 
     public function login()
     {
         $this->validate();
 
-        if (isset($this->dummyUsers[$this->email])) {
-            $user = $this->dummyUsers[$this->email];
+        $user = null;
+        $guard = null;
 
-            if ($this->password === $user['password']) {
-                session()->put('dummy_logged_in', true);
-                session()->put('dummy_user', [
-                    'id' => rand(1, 100),
-                    'name' => $user['name'],
-                    'email' => $this->email,
-                    'role' => $user['role'],
-                ]);
-
-                session()->regenerate();
-                return redirect()->intended('/agenda');
-            }
+        if (Auth::guard('student')->attempt([
+            'email' => $this->email,
+            'password' => $this->password,
+        ], $this->remember)) {
+            $user = Auth::guard('student')->user();
+            $guard = 'student';
+        } elseif (Auth::guard('teacher')->attempt([
+            'email' => $this->email,
+            'password' => $this->password,
+        ], $this->remember)) {
+            $user = Auth::guard('teacher')->user();
+            $guard = 'teacher';
         }
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
-            return redirect()->intended('/agenda');
+        if (!$user) {
+            $this->addError('email', 'Email atau password salah.');
+            return;
         }
 
-        $this->addError('email', 'The provided credentials do not match our records.');
+        session()->regenerate();
+
+        session()->flash('notify', [
+            'message' => 'Welcome, ' . $user->name . '!',
+            'type' => 'success',
+        ]);
+
+        return redirect()->intended('/absent');
     }
 
     public function render()
