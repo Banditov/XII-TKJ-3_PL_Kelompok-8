@@ -1,5 +1,6 @@
 {{-- Desktop --}}
-<aside class="glass hidden sm:flex sm:zoom-80 md:zoom-85 lg:zoom-90 xl:zoom-95 2xl:zoom-100 w-22.5 shrink-0 h-full flex-col items-center justify-between bg-black/20 backdrop-blur-[5px] border-r border-white/10 py-5">
+<aside
+    class="glass hidden sm:flex sm:zoom-80 md:zoom-85 lg:zoom-90 xl:zoom-95 2xl:zoom-100 w-22.5 shrink-0 h-full flex-col items-center justify-between bg-black/20 backdrop-blur-[5px] border-r border-white/10 py-5">
     <div class="w-full flex flex-col items-center gap-6">
         <img src="{{ asset('images/logo-sekolah.png') }}" alt="School Logo" class="h-12 w-12 object-contain">
 
@@ -9,11 +10,11 @@
                 class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'absent' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('group', 'h-8 w-8') !!}
             </a>
-            <a href="{{ route('agenda') }}" wire:navigate
+            <a href="{{ route('agenda.index') }}" wire:navigate
                 class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'agenda' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('clipboard', 'h-8 w-8') !!}
             </a>
-            <a href="{{ route('equipment') }}" wire:navigate
+            <a href="{{ route('equipment.index') }}" wire:navigate
                 class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'equipment' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('pencil', 'h-8 w-8') !!}
             </a>
@@ -21,14 +22,22 @@
                 class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'driver' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
                 {!! icon('id', 'h-8 w-8') !!}
             </a>
+
+            @if (Auth::guard('teacher')->check())
+                <a href="{{ route('register') }}" wire:navigate
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'admin.register' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
+                    {!! icon('addPerson', 'h-8 w-8') !!}
+                </a>
+            @endif
         </nav>
     </div>
 
     <div class="flex flex-col items-center gap-4">
         <div class="w-full h-0.5 bg-white rounded-full"></div>
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="flex h-12 w-12 items-center justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
+            <button type="submit"
+                class="flex h-12 w-12 items-center justify-center rounded-2xl text-slate-300 transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white">
                 {!! icon('logout', 'h-8 w-8') !!}
             </button>
         </form>
@@ -41,25 +50,34 @@
         class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'absent' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-tr-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('group', 'aspect-square w-[50%]') !!}
     </a>
-    
-    <a href="{{ route('agenda') }}" wire:navigate
+
+    <a href="{{ route('agenda.index') }}" wire:navigate
         class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'agenda' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-2xl transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('clipboard', 'aspect-square w-[50%]') !!}
     </a>
-    
-    <a href="{{ route('equipment') }}" wire:navigate
+
+    <a href="{{ route('equipment.index') }}" wire:navigate
         class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'equipment' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('pencil', 'aspect-square w-[50%]') !!}
     </a>
-    
+
     <a href="{{ route('driver') }}" wire:navigate
         class="flex aspect-square w-[20%] items-center justify-center border-t-6 {{ $active === 'driver' ? 'border-white/50 bg-linear-to-r from-blue-500 to-sky-300 text-white' : 'border-black/50 bg-gray-900 text-slate-300' }} rounded-t-[50%] transition-all duration-300 hover:bg-gray-800 hover:text-white">
         {!! icon('id', 'aspect-square w-[50%]') !!}
     </a>
-    
-    <form method="POST" action="" class="w-[20%] aspect-square">
+
+
+    @if (Auth::guard('teacher')->check())
+        <a href="{{ route('register') }}" wire:navigate
+            class="flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-white/5 hover:text-white {{ $active === 'admin.register' ? 'rounded-br-none rounded-tr-none bg-linear-to-r from-blue-500 to-sky-300 text-blue-100 shadow-md shadow-blue-300/20 ring-1 ring-white/10 border-r-2 border-white' : 'text-slate-300' }}">
+            {!! icon('addPerson', 'h-8 w-8') !!}
+        </a>
+    @endif
+
+    <form method="POST" action="{{ route('logout') }}" class="w-[20%] aspect-square">
         @csrf
-        <button type="submit" class="flex aspect-square w-full items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-tl-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+        <button type="submit"
+            class="flex aspect-square w-full items-center justify-center border-t-6 border-black/50 bg-gray-900 rounded-tl-[50%] text-slate-300 transition-all duration-300 hover:bg-gray-800 hover:text-white">
             {!! icon('logout', 'aspect-square w-[50%]') !!}
         </button>
     </form>

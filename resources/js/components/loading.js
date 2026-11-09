@@ -18,19 +18,20 @@ function loadingScreen() {
         },
 
         initLivewireLoading() {
-            if (typeof Livewire !== 'undefined') {
-                Livewire.hook('request', () => {
-                    this.showLoader();
-                });
+            if (typeof Livewire === 'undefined') return;
 
-                Livewire.hook('message.received', () => {
+            // Livewire v3: hook into commit, which wraps request/response
+            Livewire.hook('commit', ({ component, commit, respond, succeed, fail }) => {
+                this.showLoader();
+
+                succeed(({ snapshot, effect }) => {
                     this.hideLoader();
                 });
 
-                Livewire.hook('message.failed', () => {
+                fail(() => {
                     this.hideLoader();
                 });
-            }
+            });
         },
 
         initNavigationLoading() {
