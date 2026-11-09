@@ -14,7 +14,13 @@
             <p class="text-xl">- {{ $quote['author'] }}</p>
         </div>
 
-        <form wire:submit="login" class="flex flex-col items-center gap-6 mb-25 zoom-120">
+        @if (session()->has('error'))
+            <div class="mb-4 rounded-xl border border-red-400/20 bg-red-500/10 p-3 text-red-300 text-sm">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <form wire:submit="login" class="flex flex-col items-center gap-6 mb-15 zoom-120">
             {{-- Email Field --}}
             <div class="text-left w-full">
                 <label for="email" class="block text-sm font-medium text-white/70 mb-2 tracking-wide">
@@ -77,6 +83,13 @@
                     class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
                 </div>
             </button>
+
+            {{-- Google Login Button --}}
+            <a href="{{ route('google.redirect') }}"
+                class="flex items-center justify-center gap-3 w-75 py-4 px-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] active:scale-95">
+                {!! icon('google') !!}
+                <span>Masuk dengan Google</span>
+            </a>
         </form>
 
         <p class="text-white/20 text-xs mt-8 tracking-widest">

@@ -11,6 +11,7 @@ class Teacher extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
+        'google_id',
         'name',
         'email',
         'password',
