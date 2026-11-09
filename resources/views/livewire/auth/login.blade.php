@@ -9,9 +9,9 @@
 
         <p class="text-5xl font-bold mb-10 text-white">Login</p>
 
-        <div class="text-white/40 mb-10">
-            <p class="text-2xl">"Sebuah Quote"</p>
-            <p class="text-xl">- Nama Penulis</p>
+        <div class="text-white/40 mb-10 italic">
+            <p class="text-2xl">"{{ $quote['text'] }}"</p>
+            <p class="text-xl">- {{ $quote['author'] }}</p>
         </div>
 
         <form wire:submit="login" class="flex flex-col items-center gap-6 mb-25 zoom-120">

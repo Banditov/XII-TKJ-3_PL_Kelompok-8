@@ -216,6 +216,7 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
 
 - Membuat back-end untuk halaman absensi
+- Membuat fungsi quote random menggunakan Zen Quotes API
 </details>
 
 ### 09/11/2026 - 0.9.0
