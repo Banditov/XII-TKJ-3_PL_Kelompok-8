@@ -34,4 +34,9 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(SimCard::class, 'sim_card_id');
     }
+
+    public function absents()
+    {
+        return $this->hasMany(Absent::class);
+    }
 }
