@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire\Auth;
 
+use App\Services\QuoteService;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,18 @@ class Login extends Component
         'email' => 'required|email',
         'password' => 'required|min:6',
     ];
+
+    public $quote = [];
+
+    public function mount(QuoteService $quoteService)
+    {
+        $this->quote = $quoteService->getRandomQuote();
+    }
+
+    public function refreshQuote(QuoteService $quoteService)
+    {
+        $this->quote = $quoteService->refreshQuote();
+    }
 
     protected $messages = [
         'email.required' => 'Email wajib diisi.',
