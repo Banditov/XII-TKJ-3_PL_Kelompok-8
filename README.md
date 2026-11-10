@@ -81,7 +81,7 @@ Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang
 4. Instal dependencies proyek menggunakan command di bawah.
 `composer install` & `npm install`<br>
 5. Setelah semua sudah selesai, masuk ke dalam folder proyek (gunakan command `code .`), terus copy-paste file `.env.example` dan ganti namanya menjadi `.env`.<br>
-6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`.<br>
+6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`. Untuk memuat data contoh siswa pada halaman SIM, jalankan `php artisan db:seed --class=SimRecordSeeder`.<br>
 7. Setelah database sudah dibuat, jalankan command `composer run dev` dan tekan link dengan label APP_URL.<br>
 8. Selesai :D
 </details>
