@@ -23,4 +23,10 @@ class Teacher extends Authenticatable
     {
         return ['password' => 'hashed'];
     }
+
+    public function schoolClasses()
+    {
+        return $this->belongsToMany(SchoolClass::class, 'class_teacher', 'teacher_id', 'class_id')
+            ->withTimestamps();
+    }
 }

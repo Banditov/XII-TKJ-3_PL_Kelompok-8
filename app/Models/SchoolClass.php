@@ -15,4 +15,10 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Student::class, 'class_id');
     }
+
+        public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'class_teacher', 'class_id', 'teacher_id')
+            ->withTimestamps();
+    }
 }
