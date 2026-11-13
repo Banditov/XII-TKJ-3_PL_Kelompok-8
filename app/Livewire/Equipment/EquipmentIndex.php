@@ -1,62 +1,96 @@
 <?php
+
 namespace App\Livewire\Equipment;
 
-use App\Data\EquipmentData;
+use App\Models\Equipment;
+use App\Models\SchoolClass;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Layout('layouts.app', ['active' => 'equipment'])]
 class EquipmentIndex extends Component
 {
-    public array $equipment = [];
+    #[Url(as: 'kelas')]
+    public ?int $classId = null;
 
     public function mount(): void
     {
-        $this->loadEquipment();
+        $this->classId = $this->currentClass()?->id;
     }
 
-    public function loadEquipment(): void
+    protected function accessibleClasses(): Collection
     {
-        $this->equipment = EquipmentData::all();
+        if ($student = Auth::guard('student')->user()) {
+            return SchoolClass::where('id', $student->class_id)->get();
+        }
+
+        if ($teacher = Auth::guard('teacher')->user()) {
+            return $teacher->schoolClasses()->orderBy('name')->get();
+        }
+
+        return collect();
+    }
+
+    protected function currentClass(): ?SchoolClass
+    {
+        $classes = $this->accessibleClasses();
+
+        return $classes->firstWhere('id', $this->classId) ?? $classes->first();
+    }
+
+    protected function findEquipment(int $id): Equipment
+    {
+        $class = $this->currentClass();
+        abort_if(! $class, 403, 'Anda belum terhubung ke kelas mana pun.');
+
+        $item = Equipment::where('class_id', $class->id)->find($id);
+        abort_if(! $item, 404);
+
+        return $item;
     }
 
     public function increment(int $id): void
     {
-        foreach ($this->equipment as &$item) {
-            if ($item['id'] === $id) {
-                $item['total']++;
-                break;
-            }
-        }
-        unset($item);
+        $this->findEquipment($id)->increment('total');
 
         session()->flash('success', 'Jumlah berhasil ditambah!');
     }
 
     public function decrement(int $id): void
     {
-        foreach ($this->equipment as &$item) {
-            if ($item['id'] === $id && $item['total'] > 1) {
-                $item['total']--;
-                break;
-            }
+        $item = $this->findEquipment($id);
+
+        if ($item->total <= 1) {
+            session()->flash('error', 'Jumlah minimal 1. Gunakan tombol hapus untuk menghapus perlengkapan.');
+            return;
         }
-        unset($item);
+
+        $item->decrement('total');
 
         session()->flash('success', 'Jumlah berhasil dikurangi!');
     }
 
     public function delete(int $id): void
     {
-        $this->equipment = array_values(
-            array_filter($this->equipment, fn($item) => $item['id'] !== $id)
-        );
+        $this->findEquipment($id)->delete();
 
         session()->flash('success', 'Perlengkapan berhasil dihapus!');
     }
 
     public function render()
     {
-        return view('livewire.equipment.index');
+        $class = $this->currentClass();
+        $equipment = $class
+            ? Equipment::where('class_id', $class->id)->orderBy('name')->get()->toArray()
+            : [];
+
+        return view('livewire.equipment.index', [
+            'equipment' => $equipment,
+            'classes' => $this->accessibleClasses(),
+            'className' => $class?->name ?? 'Belum terhubung ke kelas',
+        ]);
     }
 }
