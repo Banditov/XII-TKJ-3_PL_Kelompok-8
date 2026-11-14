@@ -45,14 +45,12 @@ class EquipmentCreate extends Component
     {
         $this->total = 1;
 
-        // Siswa: kelas otomatis. Guru: memilih sendiri lewat dropdown.
         $student = Auth::guard('student')->user();
         if ($student) {
             $this->class_id = $student->class_id;
         }
     }
 
-    // Dipakai tombol "+" dan "-" di form
     public function increment(): void
     {
         $this->total = ($this->total ?? 0) + 1;

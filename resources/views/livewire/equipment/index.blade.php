@@ -1,5 +1,4 @@
 <section>
-    <!-- Header -->
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Perlengkapan</h1>
@@ -28,7 +27,6 @@
         </div>
     @endif
 
-    <!-- Daftar Perlengkapan -->
     <section>
         <h2 class="mb-4 text-3xl font-bold text-white">Daftar Perlengkapan</h2>
         <div class="mb-5 border-b border-white/10"></div>
