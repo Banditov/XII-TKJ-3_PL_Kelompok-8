@@ -1,5 +1,4 @@
 <section class="flex flex-col h-full">
-    <!-- Header -->
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Tambahkan Perlengkapan Baru</h1>
@@ -20,7 +19,6 @@
     @endif
 
     <form wire:submit="save" class="flex flex-col h-full gap-8 justify-between">
-        <!-- Informasi Dasar -->
         <div class="flex flex-col gap-5">
             <div>
                 <h2 class="text-2xl font-bold text-white">Informasi Dasar</h2>
@@ -36,9 +34,24 @@
             @error('name')
                 <p class="text-sm text-red-400">{{ $message }}</p>
             @enderror
+
+            @if (auth('teacher')->check())
+                <label for="class_id" class="text-lg font-semibold text-white/80">
+                    Kelas <span class="text-red-400">*</span>
+                </label>
+                <select id="class_id" wire:model="class_id"
+                    class="w-full p-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400/30">
+                    <option value="" class="text-black">-- Pilih kelas --</option>
+                    @foreach ($classes as $class)
+                        <option value="{{ $class->id }}" class="text-black">{{ $class->name }}</option>
+                    @endforeach
+                </select>
+                @error('class_id')
+                    <p class="text-sm text-red-400">{{ $message }}</p>
+                @enderror
+            @endif
         </div>
 
-        <!-- Status & Jumlah -->
         <div class="flex flex-col gap-5">
             <div>
                 <h2 class="text-2xl font-bold text-white">Status & Jumlah</h2>
@@ -65,7 +78,6 @@
             @enderror
         </div>
 
-        <!-- Catatan -->
         <div class="flex flex-col gap-5 h-full">
             <div>
                 <h2 class="text-2xl font-bold text-white">Catatan</h2>
@@ -83,9 +95,8 @@
             @enderror
         </div>
 
-        <!-- Buttons -->
         <div class="flex flex-col sm:flex-row gap-8 mt-4">
-            <a href="{{ route('equipment') }}" wire:navigate
+            <a href="{{ route('equipment.index') }}" wire:navigate
                 class="relative bg-linear-to-r from-[#ed4a4a] to-[#d43a3a] hover:from-[#d43a3a] hover:to-[#b42a2a] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group w-full sm:w-1/2 text-center">
                 <span class="relative z-10 flex items-center justify-center gap-2">Batal</span>
                 <div class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12"></div>

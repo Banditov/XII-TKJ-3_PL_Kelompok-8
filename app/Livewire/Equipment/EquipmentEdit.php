@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Equipment;
 
-use App\Data\EquipmentData;
+use App\Models\Equipment;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -31,15 +31,15 @@ class EquipmentEdit extends Component
     {
         $this->equipmentId = $id;
 
-        $equipment = EquipmentData::find($id);
+        $equipment = Equipment::find($id);
 
         if (!$equipment) {
             abort(404, 'Peralatan tidak ditemukan.');
         }
 
-        $this->name = $equipment['name'];
-        $this->total = $equipment['total'];
-        $this->description = $equipment['description'] ?? '';
+        $this->name = $equipment->name;
+        $this->total = $equipment->total;
+        $this->description = $equipment->description ?? '';
     }
 
     public function save(): void

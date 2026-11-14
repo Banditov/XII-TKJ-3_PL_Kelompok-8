@@ -7,4 +7,6 @@ if (!function_exists('icon')) {
     {
         return IconHelper::get($name, $class);
     }
+
+    
 }
