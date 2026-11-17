@@ -14,6 +14,10 @@
 </head>
 
 <body class="overflow-hidden h-screen **:select-none">
+    @persist('notification')
+        <x-notification :message="session('notify.message')" :type="session('notify.type', 'success')" />
+    @endpersist
+
     <x-loading-screen type="spinner" />
 
     @persist('background')
