@@ -48,7 +48,7 @@ class EquipmentEdit extends Component
 
         try {
             session()->flash('success', 'Peralatan berhasil diperbarui!');
-            $this->redirect(route('equipment.index'));
+            $this->redirect(route('equipment'));
 
         } catch (\Exception $e) {
             session()->flash('error', 'Gagal memperbarui peralatan. Silakan coba lagi.');
@@ -59,7 +59,7 @@ class EquipmentEdit extends Component
     {
         try {
             session()->flash('success', 'Peralatan berhasil dihapus!');
-            $this->redirect(route('equipment.index'));
+            $this->redirect(route('equipment'));
 
         } catch (\Exception $e) {
             session()->flash('error', 'Gagal menghapus peralatan. Silakan coba lagi.');

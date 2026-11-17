@@ -4,6 +4,7 @@ use App\Livewire\Agenda\AgendaCreate;
 use App\Livewire\Agenda\AgendaEdit;
 use App\Livewire\Agenda\AgendaIndex;
 use App\Models\Agenda;
+use App\Models\Student;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
@@ -98,7 +99,14 @@ test('the agenda page renders saved agendas', function () {
         'time' => '09:00',
     ]);
 
-    $this->get(route('agenda'))
+    $student = Student::create([
+        'name' => 'Test Student',
+        'email' => 'student@example.test',
+        'password' => 'password',
+    ]);
+
+    $this->actingAs($student, 'student')
+        ->get(route('agenda'))
         ->assertOk()
         ->assertSee('Persisted agenda')
         ->assertSee('Visible on the agenda page.');

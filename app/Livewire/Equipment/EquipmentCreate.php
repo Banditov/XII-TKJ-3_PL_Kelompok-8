@@ -36,7 +36,7 @@ class EquipmentCreate extends Component
 
         try {
             session()->flash('success', 'Peralatan berhasil ditambahkan!');
-            $this->redirect(route('equipment.index'));
+            $this->redirect(route('equipment'));
 
         } catch (\Exception $e) {
             session()->flash('error', 'Gagal menambahkan peralatan. Silakan coba lagi.');

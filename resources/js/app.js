@@ -6,7 +6,7 @@ import './components/background.js';
 import GlassEffect from './components/glassmorphism.js';
 import loadingScreen from './components/loading.js';
 
-window.anime = anime.default || anime;
+window.anime = anime;
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('loadingScreen', loadingScreen);

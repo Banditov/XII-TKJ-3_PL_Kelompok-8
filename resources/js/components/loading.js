@@ -18,14 +18,14 @@ function loadingScreen() {
         },
 
         initLivewireLoading() {
-            if (typeof Livewire !== 'undefined') {
-                Livewire.hook('request', ({ succeed, fail }) => {
-                    this.showLoader();
+            if (typeof Livewire === 'undefined') return;
 
-                    succeed(() => this.hideLoader());
-                    fail(() => this.hideLoader());
-                });
-            }
+            Livewire.hook('request', ({ succeed, fail }) => {
+                this.showLoader();
+
+                succeed(() => this.hideLoader());
+                fail(() => this.hideLoader());
+            });
         },
 
         initNavigationLoading() {
