@@ -1,33 +1,42 @@
 <?php
+
 namespace App\Livewire\Agenda;
 
-use App\Data\AgendaData;
+use App\Models\Agenda;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.app', ['active' => 'agenda.create'])]
 class AgendaCreate extends Component
 {
-    public $title = '';
-    public $description = '';
-    public $date = '';
-    public $time = '';
-    public $time_end = '';
+    public string $title = '';
 
-    protected $rules = [
-        'title' => 'required|min:3|max:255',
-        'description' => 'nullable|max:1000',
-        'date' => 'required|date|after_or_equal:today',
-        'time' => 'required',
-    ];
+    public string $description = '';
 
-    protected $messages = [
-        'title.required' => 'Judul agenda wajib diisi.',
-        'title.min' => 'Judul minimal 3 karakter.',
-        'date.required' => 'Tanggal wajib diisi.',
-        'date.after_or_equal' => 'Tanggal tidak boleh kurang dari hari ini.',
-        'time.required' => 'Waktu wajib diisi.',
-    ];
+    public string $date = '';
+
+    public string $time = '';
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'string', 'min:3', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'date' => ['required', 'date_format:Y-m-d', 'after_or_equal:today'],
+            'time' => ['required', 'date_format:H:i'],
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'title.required' => 'Judul agenda wajib diisi.',
+            'title.min' => 'Judul minimal 3 karakter.',
+            'date.required' => 'Tanggal wajib diisi.',
+            'date.after_or_equal' => 'Tanggal tidak boleh kurang dari hari ini.',
+            'time.required' => 'Waktu wajib diisi.',
+        ];
+    }
 
     public function mount(): void
     {
@@ -37,15 +46,10 @@ class AgendaCreate extends Component
 
     public function save(): void
     {
-        $this->validate();
+        Agenda::create($this->validate());
 
-        try {
-            session()->flash('success', 'Agenda berhasil ditambahkan!');
-
-            $this->redirect(route('agenda.index'));
-        } catch (\Exception $e) {
-            session()->flash('error', 'Gagal menambahkan agenda. Silakan coba lagi.');
-        }
+        session()->flash('success', 'Agenda berhasil ditambahkan!');
+        $this->redirect(route('agenda'));
     }
 
     public function render()
