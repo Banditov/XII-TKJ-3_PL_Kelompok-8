@@ -2,11 +2,13 @@
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Perlengkapan</h1>
-            @if ($classes->count() > 1)
+            @if (count($classes) > 1)
                 <select wire:model.live="classId"
                     class="w-fit rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 font-semibold text-white">
                     @foreach ($classes as $class)
-                        <option value="{{ $class->id }}" class="text-black">{{ $class->name }}</option>
+                        <option value="{{ $class['id'] }}" class="text-black">
+                            {{ $class['name'] }}
+                        </option>
                     @endforeach
                 </select>
             @else

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Equipment;
 
 use App\Models\Equipment;
@@ -11,6 +12,8 @@ use Livewire\Component;
 #[Layout('layouts.app', ['active' => 'equipment.create'])]
 class EquipmentCreate extends Component
 {
+    private const MAX_TOTAL = 100000;
+
     public ?int $class_id = null;
     public string $name = '';
     public ?int $total = 1;
@@ -21,7 +24,9 @@ class EquipmentCreate extends Component
         return [
             'class_id' => 'required|exists:classes,id',
             'name' => [
-                'required', 'min:3', 'max:255',
+                'required',
+                'min:3',
+                'max:255',
                 Rule::unique('equipment', 'name')->where('class_id', $this->class_id),
             ],
             'total' => 'required|integer|min:1|max:100000',
@@ -38,22 +43,21 @@ class EquipmentCreate extends Component
         'total.required' => 'Total wajib diisi.',
         'total.integer' => 'Total harus berupa angka bulat.',
         'total.min' => 'Total minimal 1.',
-        'total.max' => 'Total terlalu besar.',
+        'total.max' => 'Total maksimal 100000.',
     ];
 
     public function mount(): void
     {
         $this->total = 1;
 
-        $student = Auth::guard('student')->user();
-        if ($student) {
-            $this->class_id = $student->class_id;
+        if ($student = Auth::guard('student')->user()) {
+            $this->class_id = (int) $student->class_id;
         }
     }
 
     public function increment(): void
     {
-        $this->total = ($this->total ?? 0) + 1;
+        $this->total = min(self::MAX_TOTAL, ($this->total ?? 0) + 1);
     }
 
     public function decrement(): void
@@ -63,8 +67,10 @@ class EquipmentCreate extends Component
 
     public function save(): void
     {
-        if (Auth::guard('student')->check()) {
-            $this->class_id = Auth::guard('student')->user()->class_id;
+        if ($student = Auth::guard('student')->user()) {
+            $this->class_id = (int) $student->class_id;
+        } else {
+            abort_unless(Auth::guard('teacher')->check(), 403);
         }
 
         $this->name = trim($this->name);

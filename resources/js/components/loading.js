@@ -9,28 +9,10 @@ function loadingScreen() {
         init() {
             this.showLoader();
 
-            this.initLivewireLoading();
             this.initNavigationLoading();
 
             window.addEventListener('load', () => {
                 setTimeout(() => this.hideLoader(), 300);
-            });
-        },
-
-        initLivewireLoading() {
-            if (typeof Livewire === 'undefined') return;
-
-            // Livewire v3: hook into commit, which wraps request/response
-            Livewire.hook('commit', ({ component, commit, respond, succeed, fail }) => {
-                this.showLoader();
-
-                succeed(({ snapshot, effect }) => {
-                    this.hideLoader();
-                });
-
-                fail(() => {
-                    this.hideLoader();
-                });
             });
         },
 
