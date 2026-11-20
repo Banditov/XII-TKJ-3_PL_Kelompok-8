@@ -20,6 +20,10 @@
 
     <x-loading-screen type="spinner" />
 
+    @persist('confirm-modal')
+        <livewire:confirm-modal />
+    @endpersist
+
     @persist('background')
         <div class="fixed inset-0 z-0 bg-slate-950">
             <canvas id="bgCanvas" class="w-full h-full block"></canvas>

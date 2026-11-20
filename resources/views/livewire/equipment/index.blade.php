@@ -49,8 +49,13 @@
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-lime-400/20 bg-lime-500/10 text-lime-300/50 transition-all duration-300 hover:bg-lime-500/20 hover:text-lime-300/80"
                             aria-label="Tambah">+</button>
 
-                        <x-row-actions :editRoute="route('equipment.edit', $item['id'])" :deleteId="$item['id']"
-                            :deleteName="$item['name']" />
+                        <x-row-actions 
+                            :editRoute="route('equipment.edit', $item['id'])"
+                            :deleteId="$item['id']"
+                            :deleteName="$item['name']"
+                            deleteAction="confirmDelete"
+                            :deleteParams="[$item['id'], $item['name']]"
+                        />
                     </div>
                 </article>
             @empty

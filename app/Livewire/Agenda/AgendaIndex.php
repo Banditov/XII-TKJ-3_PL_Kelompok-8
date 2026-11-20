@@ -7,6 +7,7 @@ use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\ConfirmModal;
 
 #[Layout('layouts.app', ['active' => 'agenda'])]
 class AgendaIndex extends Component
@@ -15,6 +16,28 @@ class AgendaIndex extends Component
     public array $upcomingTasks = [];
     public array $lateTasks = [];
     public ?int $selectedClassId = null;
+    protected $listeners = ['delete-confirmed' => 'delete'];
+
+    public function confirmDelete(int $id, string $title)
+    {
+        $this->dispatch('open-confirm-modal', [
+            'title' => 'Hapus Agenda',
+            'message' => "Apakah Anda yakin ingin menghapus agenda \"{$title}\"? Tindakan ini tidak dapat dibatalkan.",
+            'confirmText' => 'Ya, Hapus',
+            'actionEvent' => 'delete-confirmed',
+            'actionPayload' => ['id' => $id],
+        ])->to(ConfirmModal::class);
+    }
+
+    public function delete(int $id): void
+    {
+        $agenda = Agenda::find($id);
+        if ($agenda) {
+            $agenda->delete();
+            $this->dispatch('notify', message: 'Agenda berhasil dihapus.', type: 'success');
+            $this->loadTasks();
+        }
+    }
 
     public function mount(): void
     {
@@ -74,17 +97,6 @@ class AgendaIndex extends Component
     public function getClassNameProperty(): string
     {
         return SchoolClass::find($this->selectedClassId)?->name ?? '-';
-    }
-
-    public function delete(int $id): void
-    {
-        $agenda = Agenda::find($id);
-
-        if ($agenda && $this->canEdit($agenda)) {
-            $agenda->delete();
-            $this->dispatch('notify', message: 'Agenda berhasil dihapus.', type: 'success');
-            $this->loadTasks();
-        }
     }
 
     private function canEdit(Agenda $agenda): bool

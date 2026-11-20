@@ -117,8 +117,13 @@
                                     <span>{{ $task['description'] }}</span>
                                 </div>
 
-                                <x-row-actions :editRoute="route('agenda.edit', $task['id'])" :deleteId="$task['id']"
-                                    deleteName="agenda ini" />
+                                <x-row-actions 
+                                    :editRoute="route('agenda.edit', $task['id'])"
+                                    :deleteId="$task['id']"
+                                    deleteName="agenda ini" 
+                                    deleteAction="confirmDelete"
+                                    :deleteParams="[$task['id'], $task['title']]"
+                                />
                             </div>
                         @endforeach
                     </div>

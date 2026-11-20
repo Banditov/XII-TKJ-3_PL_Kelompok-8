@@ -7,6 +7,7 @@ use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\ConfirmModal;
 
 #[Layout('layouts.app', ['active' => 'equipment'])]
 class EquipmentIndex extends Component
@@ -15,6 +16,28 @@ class EquipmentIndex extends Component
     public ?int $classId = null;
     public array $classes = [];
     public string $className = '-';
+    protected $listeners = ['delete-confirmed' => 'delete'];
+
+    public function confirmDelete(int $id, string $title)
+    {
+        $this->dispatch('open-confirm-modal', [
+            'title' => 'Hapus Agenda',
+            'message' => "Apakah Anda yakin ingin menghapus agenda \"{$title}\"? Tindakan ini tidak dapat dibatalkan.",
+            'confirmText' => 'Ya, Hapus',
+            'actionEvent' => 'delete-confirmed',
+            'actionPayload' => ['id' => $id],
+        ])->to(ConfirmModal::class);
+    }
+
+    public function delete(int $id): void
+    {
+        $item = Equipment::find($id);
+        if ($item) {
+            $item->delete();
+            $this->dispatch('notify', message: 'Perlengkapan berhasil dihapus.', type: 'success');
+            $this->loadData();
+        }
+    }
 
     public function mount(): void
     {
@@ -65,16 +88,6 @@ class EquipmentIndex extends Component
         $item = Equipment::find($id);
         if ($item && $item->total > 0) {
             $item->decrement('total');
-            $this->loadData();
-        }
-    }
-
-    public function delete(int $id): void
-    {
-        $item = Equipment::find($id);
-        if ($item) {
-            $item->delete();
-            $this->dispatch('notify', message: 'Perlengkapan berhasil dihapus.', type: 'success');
             $this->loadData();
         }
     }
