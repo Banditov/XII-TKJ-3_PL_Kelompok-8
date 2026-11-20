@@ -237,6 +237,7 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 - Komponenisasi kode
 - Refactor & perbaikan kode
 - Memperbarui bagian instalasi pada README
+- Memperbarui dependencies
 </details>
 
 ### 18/11/2026 - 0.12.0
