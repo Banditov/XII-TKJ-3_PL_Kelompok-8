@@ -4,9 +4,9 @@
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/GitHub Version-1.0.0-red">
    </a>
-   <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
+   <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.0.0-green">
-   </a> --><br>
+   </a><br>
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-blue.svg">
    </a>
