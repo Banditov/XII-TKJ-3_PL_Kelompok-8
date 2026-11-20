@@ -5,7 +5,7 @@
       <img src="https://img.shields.io/badge/GitHub Version-0.13.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
+      <img src="https://img.shields.io/badge/Latest Release-1.0.0-green">
    </a> --><br>
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-blue.svg">
@@ -28,7 +28,6 @@
 - [Instalasi](#instalasi)
 - [Fitur Utama](#fitur-utama)
 - [Penggunaan](#penggunaan)
-- [Arsitektur](#arsitektur)
 - [Kontributor](#kontributor)
 - [Lisensi](#lisensi)
 - [Changelog](#changelog)
@@ -81,8 +80,8 @@ Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang
 4. Instal dependencies proyek menggunakan command di bawah.
 `composer install` & `npm install`<br>
 5. Setelah semua sudah selesai, masuk ke dalam folder proyek (gunakan command `code .`), terus copy-paste file `.env.example` dan ganti namanya menjadi `.env`.<br>
-6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`. Untuk memuat data contoh siswa pada halaman SIM, jalankan `php artisan db:seed --class=SimRecordSeeder`.<br>
-7. Setelah database sudah dibuat, jalankan command `composer run dev` dan tekan link dengan label APP_URL.<br>
+6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`.<br>
+7. Setelah database sudah dibuat, jalankan command `php artisan storage:link` dan `composer run dev` dan tekan link dengan label APP_URL.<br>
 8. Login masuk ke akun admin dengan username: `admin@ski.sch.id` dan password: `password123`.
 9. Selesai. :D
 </details>
@@ -214,8 +213,8 @@ Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang
 ## Kontributor
 
 <img src="https://avatars.githubusercontent.com/u/199484083" width="20"> [Christopher V. C. - "Banditov"](https://github.com/Banditov), sebagai ketua & full-stack developer.<br>
-<img src="https://avatars.githubusercontent.com/u/253169611" width="20"> [Michelle N. - "MN ( o v o )"](https://github.com/idunno2467), sebagai UI/UX designer.<br>
-<img src="https://avatars.githubusercontent.com/u/226641799" width="20"> [Valentino - "Naomikoshi"](https://github.com/Naomikoshi), sebagai front-end developer.
+<img src="https://avatars.githubusercontent.com/u/253169611" width="20"> [Michelle N. - "MN ( o v o )"](https://github.com/idunno2467), sebagai UI/UX designer & back-end developer.<br>
+<img src="https://avatars.githubusercontent.com/u/226641799" width="20"> [Valentino - "Naomikoshi"](https://github.com/Naomikoshi), sebagai front-end developer & back-end developer.
 
 ## Lisensi
 
@@ -234,7 +233,8 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
 
-- Membuat back-end untuk halaman pendataan perlengkapan
+- Membuat back-end untuk halaman pendataan perlengkapan dan halaman pendataan SIM
+- Komponenisasi kode
 </details>
 
 ### 20/11/2026 - 0.12.1

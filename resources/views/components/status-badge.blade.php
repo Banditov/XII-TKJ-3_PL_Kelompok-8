@@ -1,4 +1,4 @@
-@props(['status'])
+@props(['status', 'label' => null])
 
 @php
     $classes = match($status) {
@@ -8,14 +8,15 @@
         'alpha' => 'border-red-400/20 bg-red-500/10 text-red-300/70',
         default => 'border-white/20 bg-white/10 text-white/50',
     };
-@endphp
-
-<span class="rounded-[14px] border text-center px-4 py-2 text-sm font-semibold {{ $classes }}">
-    {{ match($status) {
-        'hadir' => 'Sudah Absen',
+    
+    $defaultLabels = [
+        'hadir' => 'Hadir',
         'izin'  => 'Izin',
         'sakit' => 'Sakit',
         'alpha' => 'Alpha',
-        default => 'Belum Absen',
-    } }}
+    ];
+@endphp
+
+<span class="rounded-[14px] border text-center px-4 py-2 text-sm font-semibold {{ $classes }}">
+    {{ $label ?? ($defaultLabels[$status] ?? 'Unknown') }}
 </span>

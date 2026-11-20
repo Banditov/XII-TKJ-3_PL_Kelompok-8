@@ -24,6 +24,10 @@
         <livewire:confirm-modal />
     @endpersist
 
+    @persist('image-modal')
+        <livewire:image-modal />
+    @endpersist
+
     @persist('background')
         <div class="fixed inset-0 z-0 bg-slate-950">
             <canvas id="bgCanvas" class="w-full h-full block"></canvas>

@@ -2,111 +2,118 @@
 
 namespace App\Livewire\Driver;
 
-use App\Models\SimRecord;
-use Illuminate\Validation\Rule;
+use App\Models\Student;
+use App\Models\SchoolClass;
+use App\Livewire\ConfirmModal;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 #[Layout('layouts.app', ['active' => 'driver'])]
 class DriverIndex extends Component
 {
-    #[Locked]
-    public ?int $editingId = null;
+    use WithFileUploads;
 
-    public string $name = '';
+    public ?int $selectedClassId = null;
+    public $totalStudents;
+    public $hasSimCount;
+    public $noSimCount;
 
-    public string $nis = '';
+    public $simImage;
 
-    public bool $hasSim = false;
+    protected $listeners = ['delete-confirmed' => 'delete'];
 
-    public bool $showForm = false;
-
-    public function create(): void
+    public function mount(): void
     {
-        $this->resetForm();
-        $this->showForm = true;
+        if (Auth::guard('student')->check()) {
+            $this->selectedClassId = Auth::guard('student')->user()->class_id;
+        } else {
+            $this->selectedClassId = SchoolClass::first()?->id;
+        }
+
+        $this->loadCounts();
     }
 
-    public function edit(int $id): void
+    public function updatedSelectedClassId(): void
     {
-        $record = SimRecord::findOrFail($id);
-
-        $this->resetValidation();
-        $this->editingId = $record->id;
-        $this->name = $record->name;
-        $this->nis = $record->nis;
-        $this->hasSim = $record->has_sim;
-        $this->showForm = true;
+        $this->loadCounts();
     }
 
-    public function save(): void
+    public function loadCounts(): void
     {
-        $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'nis' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('sim_records', 'nis')->ignore($this->editingId),
-            ],
-            'hasSim' => ['boolean'],
-        ], [
-            'name.required' => 'Nama siswa wajib diisi.',
-            'nis.required' => 'NIS wajib diisi.',
-            'nis.unique' => 'NIS sudah terdaftar.',
-        ]);
+        if (!$this->selectedClassId) return;
 
-        $record = $this->editingId
-            ? SimRecord::findOrFail($this->editingId)
-            : new SimRecord;
+        $query = Student::where('class_id', $this->selectedClassId);
 
-        $record->fill([
-            'name' => $validated['name'],
-            'nis' => $validated['nis'],
-            'has_sim' => $validated['hasSim'],
-        ])->save();
+        $this->totalStudents = $query->clone()->count();
+        $this->hasSimCount = $query->clone()->whereNotNull('sim_card_path')->count();
+        $this->noSimCount = $query->clone()->whereNull('sim_card_path')->count();
+    }
 
-        session()->flash('success', $this->editingId
-            ? 'Data SIM siswa berhasil diperbarui.'
-            : 'Data SIM siswa berhasil ditambahkan.');
-
-        $this->resetForm();
+    public function confirmDelete(int $id, string $name)
+    {
+        $this->dispatch('open-confirm-modal', [
+            'title' => 'Hapus Data SIM',
+            'message' => "Apakah Anda yakin ingin menghapus foto SIM milik \"{$name}\"? Tindakan ini tidak dapat dibatalkan.",
+            'confirmText' => 'Ya, Hapus',
+            'actionEvent' => 'delete-confirmed',
+            'actionPayload' => ['id' => $id],
+        ])->to(ConfirmModal::class);
     }
 
     public function delete(int $id): void
     {
-        SimRecord::findOrFail($id)->delete();
+        $student = Student::find($id);
+        if ($student && $student->sim_card_path) {
+            Storage::disk('public')->delete($student->sim_card_path);
+            $student->update(['sim_card_path' => null]);
+            
+            $this->dispatch('notify', message: 'Data SIM berhasil dihapus.', type: 'success');
+            $this->loadCounts();
+        }
+    }
 
-        if ($this->editingId === $id) {
-            $this->resetForm();
+    public function updatedSimImage()
+    {
+        $this->validate(['simImage' => 'image|max:2048']);
+
+        $student = Auth::guard('student')->user();
+
+        if ($student->sim_card_path) {
+            Storage::disk('public')->delete($student->sim_card_path);
         }
 
-        session()->flash('success', 'Data SIM siswa berhasil dihapus.');
+        $path = $this->simImage->store('sim_images', 'public');
+        $student->update(['sim_card_path' => $path]);
+
+        $this->reset('simImage');
+        $this->loadCounts();
+        $this->dispatch('notify', message: 'Foto SIM berhasil diunggah.', type: 'success');
     }
 
-    public function cancel(): void
+    public function removeMyImage()
     {
-        $this->resetForm();
+        $student = Auth::guard('student')->user();
+        if ($student->sim_card_path) {
+            Storage::disk('public')->delete($student->sim_card_path);
+            $student->update(['sim_card_path' => null]);
+            $this->loadCounts();
+            $this->dispatch('notify', message: 'Foto SIM dihapus.', type: 'success');
+        }
     }
 
-    private function resetForm(): void
+    public function getClassNameProperty(): string
     {
-        $this->resetValidation();
-        $this->editingId = null;
-        $this->name = '';
-        $this->nis = '';
-        $this->hasSim = false;
-        $this->showForm = false;
+        return SchoolClass::find($this->selectedClassId)?->name ?? '-';
     }
 
     public function render()
     {
         return view('livewire.driver.index', [
-            'students' => SimRecord::query()->orderBy('name')->get(),
-            'totalStudents' => SimRecord::count(),
-            'hasSimCount' => SimRecord::where('has_sim', true)->count(),
-            'noSimCount' => SimRecord::where('has_sim', false)->count(),
+            'students' => Student::where('class_id', $this->selectedClassId)->orderBy('name')->get(),
+            'classes' => Auth::guard('teacher')->check() ? SchoolClass::orderBy('name')->get() : collect(),
         ]);
     }
 }
