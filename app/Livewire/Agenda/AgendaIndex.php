@@ -7,6 +7,7 @@ use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
 use App\Livewire\ConfirmModal;
 
 #[Layout('layouts.app', ['active' => 'agenda'])]
@@ -15,6 +16,7 @@ class AgendaIndex extends Component
     public array $tasksToday = [];
     public array $upcomingTasks = [];
     public array $lateTasks = [];
+    #[Url(as: 'class_id')] 
     public ?int $selectedClassId = null;
     protected $listeners = ['delete-confirmed' => 'delete'];
 
@@ -41,10 +43,12 @@ class AgendaIndex extends Component
 
     public function mount(): void
     {
-        if (Auth::guard('student')->check()) {
-            $this->selectedClassId = Auth::guard('student')->user()->class_id;
-        } else {
-            $this->selectedClassId = SchoolClass::first()?->id;
+        if (!$this->selectedClassId) {
+            if (Auth::guard('student')->check()) {
+                $this->selectedClassId = Auth::guard('student')->user()->class_id;
+            } else {
+                $this->selectedClassId = SchoolClass::first()?->id;
+            }
         }
 
         $this->loadTasks();

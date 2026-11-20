@@ -26,24 +26,6 @@
             </div>
 
             <x-form-input label="Nama Perlengkapan" name="name" placeholder="Contoh: Papan Tulis" autofocus />
-
-            @if (auth('teacher')->check())
-                <div>
-                    <label for="class_id" class="text-lg font-semibold text-white/80">
-                        Kelas <span class="text-red-400">*</span>
-                    </label>
-                    <select id="class_id" wire:model="class_id"
-                        class="w-full p-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400/30 appearance-none cursor-pointer mt-2">
-                        <option value="" class="bg-slate-900 text-white/60">-- Pilih kelas --</option>
-                        @foreach ($classes as $class)
-                            <option value="{{ $class->id }}" class="bg-slate-900 text-white">{{ $class->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('class_id')
-                        <p class="text-sm text-red-400 mt-1.5">{{ $message }}</p>
-                    @enderror
-                </div>
-            @endif
         </div>
 
         <div class="flex flex-col gap-5">
@@ -81,12 +63,10 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-8 mt-4">
-            <a href="{{ route('equipment.index') }}" wire:navigate
+            <a href="{{ route('equipment.index', ['class_id' => $classId]) }}" wire:navigate
                 class="relative bg-linear-to-r from-[#ed4a4a] to-[#d43a3a] hover:from-[#d43a3a] hover:to-[#b42a2a] transition-all duration-300 text-white font-bold py-4 px-4 rounded-xl text-lg shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:scale-[1.02] active:scale-95 overflow-hidden group w-full sm:w-1/2 text-center">
                 <span class="relative z-10 flex items-center justify-center gap-2">Batal</span>
-                <div
-                    class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
-                </div>
+                <div class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12"></div>
             </a>
 
             <button type="submit" wire:loading.attr="disabled" wire:target="save"
@@ -95,9 +75,7 @@
                     <span wire:loading.remove wire:target="save">Simpan</span>
                     <span wire:loading wire:target="save">Menyimpan...</span>
                 </span>
-                <div
-                    class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12">
-                </div>
+                <div class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12"></div>
             </button>
         </div>
     </form>

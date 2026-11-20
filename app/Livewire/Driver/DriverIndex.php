@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\SchoolClass;
 use App\Livewire\ConfirmModal;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class DriverIndex extends Component
 {
     use WithFileUploads;
 
-    public ?int $selectedClassId = null;
+    #[Url(as: 'class_id')]
+    public ?int $selectedClassId = 0;
+
     public $totalStudents;
     public $hasSimCount;
     public $noSimCount;
@@ -27,10 +30,12 @@ class DriverIndex extends Component
 
     public function mount(): void
     {
-        if (Auth::guard('student')->check()) {
-            $this->selectedClassId = Auth::guard('student')->user()->class_id;
-        } else {
-            $this->selectedClassId = SchoolClass::first()?->id;
+        if (!$this->selectedClassId) {
+            if (Auth::guard('student')->check()) {
+                $this->selectedClassId = Auth::guard('student')->user()->class_id;
+            } else {
+                $this->selectedClassId = SchoolClass::first()?->id;
+            }
         }
 
         $this->loadCounts();

@@ -4,25 +4,30 @@ namespace App\Livewire\Equipment;
 
 use App\Models\Equipment;
 use App\Models\SchoolClass;
+use App\Livewire\ConfirmModal;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use App\Livewire\ConfirmModal;
 
 #[Layout('layouts.app', ['active' => 'equipment'])]
 class EquipmentIndex extends Component
 {
     public array $equipment = [];
-    public ?int $classId = null;
+
+    #[Url(as: 'class_id')]
+    public ?int $classId = 0;
+
     public array $classes = [];
     public string $className = '-';
+    
     protected $listeners = ['delete-confirmed' => 'delete'];
 
-    public function confirmDelete(int $id, string $title)
+    public function confirmDelete(int $id, string $name)
     {
         $this->dispatch('open-confirm-modal', [
-            'title' => 'Hapus Agenda',
-            'message' => "Apakah Anda yakin ingin menghapus agenda \"{$title}\"? Tindakan ini tidak dapat dibatalkan.",
+            'title' => 'Hapus Perlengkapan',
+            'message' => "Apakah Anda yakin ingin menghapus perlengkapan \"{$name}\"? Tindakan ini tidak dapat dibatalkan.",
             'confirmText' => 'Ya, Hapus',
             'actionEvent' => 'delete-confirmed',
             'actionPayload' => ['id' => $id],
@@ -41,6 +46,13 @@ class EquipmentIndex extends Component
 
     public function mount(): void
     {
+        if (!$this->classId) {
+            if (Auth::guard('student')->check()) {
+                $this->classId = Auth::guard('student')->user()->class_id;
+            } else {
+                $this->classId = SchoolClass::first()?->id;
+            }
+        }
         $this->loadData();
     }
 
@@ -56,10 +68,6 @@ class EquipmentIndex extends Component
             $this->classes = []; 
         } else {
             $this->classes = SchoolClass::orderBy('name')->get()->toArray();
-
-            if (!$this->classId && count($this->classes) > 0) {
-                $this->classId = $this->classes[0]['id'];
-            }
         }
 
         $this->className = SchoolClass::find($this->classId)?->name ?? '-';
@@ -94,6 +102,10 @@ class EquipmentIndex extends Component
 
     public function render()
     {
-        return view('livewire.equipment.index');
+        return view('livewire.equipment.index', [
+            'classes' => Auth::guard('teacher')->check()
+                ? SchoolClass::orderBy('name')->get()
+                : collect(),
+        ]);
     }
 }

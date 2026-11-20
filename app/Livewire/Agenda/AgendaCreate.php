@@ -3,13 +3,15 @@
 namespace App\Livewire\Agenda;
 
 use App\Models\Agenda;
+use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-#[Layout('layouts.app', ['active' => 'agenda.create'])]
+#[Layout('layouts.app', ['active' => 'agenda'])]
 class AgendaCreate extends Component
 {
+    public ?int $selectedClassId = null;
     public string $title = '';
     public string $description = '';
     public string $date = '';
@@ -40,22 +42,23 @@ class AgendaCreate extends Component
     public function mount(): void
     {
         $this->date = now()->format('Y-m-d');
+
+        $this->selectedClassId = request()->query('class_id') 
+            ?? Auth::guard('student')->user()?->class_id 
+            ?? SchoolClass::first()?->id;
     }
 
     public function save(): void
     {
         $this->validate();
 
-        $classId = Auth::guard('student')->user()?->class_id
-            ?? \App\Models\SchoolClass::first()?->id;
-
-        if (!$classId) {
+        if (!$this->selectedClassId) {
             $this->dispatch('notify', message: 'Kelas tidak ditemukan.', type: 'error');
             return;
         }
 
         Agenda::create([
-            'class_id' => $classId,
+            'class_id' => $this->selectedClassId,
             'title' => $this->title,
             'description' => $this->description,
             'date' => $this->date,
@@ -64,7 +67,8 @@ class AgendaCreate extends Component
         ]);
 
         $this->dispatch('notify', message: 'Agenda berhasil ditambahkan.', type: 'success');
-        $this->redirect(route('agenda.index'), navigate: true);
+
+        $this->redirect(route('agenda.index', ['class_id' => $this->selectedClassId]), navigate: true);
     }
 
     public function render()

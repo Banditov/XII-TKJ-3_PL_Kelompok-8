@@ -26,13 +26,10 @@
     @endif
 
     <!-- Stats Cards -->
-    <div
-        class="mb-7 grid grid-cols-3 gap-5 4xs:zoom-60 xs:zoom-70 sm:zoom-80 md:zoom-90 lg:zoom-100 xl:zoom-110 2xl:zoom-120">
+    <div class="mb-7 grid grid-cols-3 gap-5 4xs:zoom-60 xs:zoom-70 sm:zoom-80 md:zoom-90 lg:zoom-100 xl:zoom-110 2xl:zoom-120">
         {{-- Tugas Mendatang --}}
-        <div
-            class="rounded-[18px] border flex gap-5 items-center border-blue-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
-            <div
-                class="flex h-20 w-20 items-center justify-center rounded-full border border-blue-400/20 bg-blue-500/10 text-blue-300/70">
+        <div class="rounded-[18px] border flex gap-5 items-center border-blue-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full border border-blue-400/20 bg-blue-500/10 text-blue-300/70">
                 {!! icon('task', 'h-10 w-10') !!}
             </div>
             <div class="flex flex-col">
@@ -42,10 +39,8 @@
         </div>
 
         {{-- Tugas Hari Ini --}}
-        <div
-            class="rounded-[18px] border flex gap-5 items-center border-red-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
-            <div
-                class="flex h-20 w-20 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/70">
+        <div class="rounded-[18px] border flex gap-5 items-center border-red-400/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/70">
                 {!! icon('important', 'h-10 w-10') !!}
             </div>
             <div class="flex flex-col">
@@ -55,10 +50,8 @@
         </div>
 
         {{-- Sudah Lewat --}}
-        <div
-            class="rounded-[18px] border flex gap-5 items-center border-white/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
-            <div
-                class="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/70">
+        <div class="rounded-[18px] border flex gap-5 items-center border-white/20 bg-white/5 p-4 shadow-xl shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:bg-white/10">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/70">
                 {!! icon('correct', 'h-10 w-10') !!}
             </div>
             <div class="flex flex-col">
@@ -93,11 +86,9 @@
                             @php
                                 $date = \Carbon\Carbon::parse($task['date']);
                             @endphp
-                            <div
-                                class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
+                            <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
                                 <div class="flex flex-col gap-2 w-full">
-                                    <div
-                                        class="flex gap-2 sm:items-center justify-center sm:justify-start items-start sm:flex-row flex-col sm:gap-8">
+                                    <div class="flex gap-2 sm:items-center justify-center sm:justify-start items-start sm:flex-row flex-col sm:gap-8">
                                         <p class="text-2xl font-semibold">{{ $task['title'] }}</p>
                                         <div class="flex items-center gap-2">
                                             <div class="flex items-center justify-center">
@@ -118,7 +109,7 @@
                                 </div>
 
                                 <x-row-actions 
-                                    :editRoute="route('agenda.edit', $task['id'])"
+                                    :editRoute="route('agenda.edit', ['id' => $task['id'], 'class_id' => $selectedClassId])"
                                     :deleteId="$task['id']"
                                     deleteName="agenda ini" 
                                     deleteAction="confirmDelete"
@@ -151,11 +142,9 @@
                         $lateDate = \Carbon\Carbon::parse($lateTask['date']);
                     @endphp
 
-                    <div
-                        class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10 mb-3 last:mb-0">
+                    <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10 mb-3 last:mb-0">
                         <div class="flex flex-col gap-2 w-full">
-                            <div
-                                class="flex gap-2 sm:items-center justify-center sm:justify-start items-start sm:flex-row flex-col sm:gap-8">
+                            <div class="flex gap-2 sm:items-center justify-center sm:justify-start items-start sm:flex-row flex-col sm:gap-8">
                                 <p class="text-2xl font-semibold">{{ $lateTask['title'] }}</p>
                                 <div class="flex gap-2">
                                     <div class="flex items-center justify-center">
@@ -167,8 +156,13 @@
                             <span>{{ $lateTask['description'] }}</span>
                         </div>
 
-                        <x-row-actions :editRoute="route('agenda.edit', $lateTask['id'])" :deleteId="$lateTask['id']"
-                            deleteName="agenda ini" />
+                        <x-row-actions 
+                            :editRoute="route('agenda.edit', ['id' => $lateTask['id'], 'class_id' => $selectedClassId])"
+                            :deleteId="$lateTask['id']"
+                            deleteName="agenda ini" 
+                            deleteAction="confirmDelete"
+                            :deleteParams="[$lateTask['id'], $lateTask['title']]"
+                        />
                     </div>
                 @empty
                     <x-empty-state message="Tidak ada tugas yang lewat! :D" icon="check" />

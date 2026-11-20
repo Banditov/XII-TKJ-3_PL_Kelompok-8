@@ -3,20 +3,23 @@
 namespace App\Livewire\Equipment;
 
 use App\Models\Equipment;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-#[Layout('layouts.app', ['active' => 'equipment.edit'])]
+#[Layout('layouts.app', ['active' => 'equipment'])]
 class EquipmentEdit extends Component
 {
     private const MAX_TOTAL = 100000;
 
     public ?int $equipmentId = null;
+    public ?int $classId = null;
     public string $name = '';
     public int $total = 1;
     public string $description = '';
+    public string $className = '';
 
     protected $messages = [
         'name.required' => 'Nama peralatan wajib diisi.',
@@ -35,9 +38,11 @@ class EquipmentEdit extends Component
         $this->equipmentId = $id;
         $equipment = $this->findAccessibleEquipment();
 
+        $this->classId = $equipment->class_id;
         $this->name = $equipment->name;
         $this->total = $equipment->total;
         $this->description = $equipment->description ?? '';
+        $this->className = SchoolClass::find($this->classId)?->name ?? 'XII TKJ 3';
     }
 
     public function increment(): void
@@ -74,7 +79,8 @@ class EquipmentEdit extends Component
         ]);
 
         session()->flash('success', 'Peralatan berhasil diperbarui!');
-        $this->redirect(route('equipment.index'), navigate: true);
+
+        $this->redirect(route('equipment.index', ['class_id' => $this->classId]), navigate: true);
     }
 
     public function delete(): void
@@ -82,7 +88,8 @@ class EquipmentEdit extends Component
         $this->findAccessibleEquipment()->delete();
 
         session()->flash('success', 'Peralatan berhasil dihapus!');
-        $this->redirect(route('equipment.index'), navigate: true);
+
+        $this->redirect(route('equipment.index', ['class_id' => $this->classId]), navigate: true);
     }
 
     private function findAccessibleEquipment(): Equipment

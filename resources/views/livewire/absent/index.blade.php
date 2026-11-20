@@ -7,8 +7,11 @@
         </div>
 
         <div class="flex items-center gap-3">
-            <x-class-selector :classes="$classes ?? []" selected="selectedClassId"
-                :isTeacher="Auth::guard('teacher')->check()" />
+            <x-class-selector 
+                :classes="$classes ?? []" 
+                selected="selectedClassId" 
+                :isTeacher="Auth::guard('teacher')->check()" 
+            />
 
             <div x-data="{ open: false }" class="relative flex items-center gap-3">
                 <p class="text-lg font-semibold text-white 4xs:hidden sm:block">Pilih Tanggal:</p>

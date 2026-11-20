@@ -6,10 +6,11 @@ use App\Models\Agenda;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.app', ['active' => 'agenda.edit'])]
+#[Layout('layouts.app', ['active' => 'agenda'])]
 class AgendaEdit extends Component
 {
     public ?int $agendaId = null;
+    public ?int $selectedClassId = null;
     public string $title = '';
     public string $description = '';
     public string $date = '';
@@ -32,6 +33,7 @@ class AgendaEdit extends Component
         $agenda = Agenda::findOrFail($id);
 
         $this->agendaId = $agenda->id;
+        $this->selectedClassId = $agenda->class_id;
         $this->title = $agenda->title;
         $this->description = $agenda->description ?? '';
         $this->date = $agenda->date->format('Y-m-d');
@@ -53,7 +55,8 @@ class AgendaEdit extends Component
         ]);
 
         $this->dispatch('notify', message: 'Agenda berhasil diperbarui.', type: 'success');
-        $this->redirect(route('agenda.index'), navigate: true);
+
+        $this->redirect(route('agenda.index', ['class_id' => $this->selectedClassId]), navigate: true);
     }
 
     public function delete(): void
@@ -61,7 +64,8 @@ class AgendaEdit extends Component
         Agenda::findOrFail($this->agendaId)->delete();
 
         $this->dispatch('notify', message: 'Agenda berhasil dihapus.', type: 'success');
-        $this->redirect(route('agenda.index'), navigate: true);
+
+        $this->redirect(route('agenda.index', ['class_id' => $this->selectedClassId]), navigate: true);
     }
 
     public function render()

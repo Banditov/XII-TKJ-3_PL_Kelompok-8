@@ -7,15 +7,15 @@ use App\Models\Student;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
 
 #[Layout('layouts.app', ['active' => 'absent'])]
 class AbsentIndex extends Component
 {
     public string $selectedDate;
     public array $students = [];
+    #[Url(as: 'class_id')]
     public ?int $selectedClassId = null;
-
-    // Permission state
     public bool $showPermissionForm = false;
     public string $permissionReason = '';
 
@@ -23,9 +23,12 @@ class AbsentIndex extends Component
     {
         $this->selectedDate = now()->format('Y-m-d');
 
-        $student = Auth::guard('student')->user();
-        if ($student) {
-            $this->selectedClassId = $student->class_id;
+        if (!$this->selectedClassId) {
+            if (Auth::guard('student')->check()) {
+                $this->selectedClassId = Auth::guard('student')->user()->class_id;
+            } else {
+                $this->selectedClassId = SchoolClass::first()?->id;
+            }
         }
 
         $this->loadStudents();
@@ -43,17 +46,17 @@ class AbsentIndex extends Component
 
     public function loadStudents(): void
     {
+        if (!$this->selectedClassId) {
+            $this->students = [];
+            return;
+        }
+
         $date = $this->selectedDate;
 
         $query = Student::with(['absents' => function ($q) use ($date) {
                 $q->where('date', $date);
-            }, 'schoolClass']);
-
-        if (!Auth::guard('teacher')->check()) {
-            $query->where('class_id', Auth::guard('student')->user()->class_id);
-        } elseif ($this->selectedClassId) {
-            $query->where('class_id', $this->selectedClassId);
-        }
+            }, 'schoolClass'])
+            ->where('class_id', $this->selectedClassId);
 
         $this->students = $query
             ->orderBy('name')
