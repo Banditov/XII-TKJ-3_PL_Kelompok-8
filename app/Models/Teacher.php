@@ -1,5 +1,4 @@
 <?php
-// app/Models/Teacher.php
 
 namespace App\Models;
 

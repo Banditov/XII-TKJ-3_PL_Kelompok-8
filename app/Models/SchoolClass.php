@@ -1,5 +1,4 @@
 <?php
-// app/Models/SchoolClass.php
 
 namespace App\Models;
 

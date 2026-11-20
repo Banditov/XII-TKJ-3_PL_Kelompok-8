@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 
-Route::get('/', Login::class)->name('login');
-
-Route::get('/login', Login::class)->name('login');
-Route::get('/agenda', AgendaIndex::class)->name('agenda');
 Route::get('/', fn () => redirect('/login'));
 
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');

@@ -10,10 +10,12 @@ return new class extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('date');
-            $table->time('time');
+            $table->time('time')->nullable();
+            $table->time('time_end')->nullable();
             $table->timestamps();
         });
     }
