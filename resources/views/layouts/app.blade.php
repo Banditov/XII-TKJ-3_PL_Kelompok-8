@@ -14,7 +14,15 @@
 </head>
 
 <body class="overflow-hidden h-screen **:select-none">
+    @persist('notification')
+        <x-notification :message="session('notify.message')" :type="session('notify.type', 'success')" />
+    @endpersist
+
     <x-loading-screen type="spinner" />
+
+    @persist('confirm-modal')
+        <livewire:confirm-modal />
+    @endpersist
 
     @persist('background')
         <div class="fixed inset-0 z-0 bg-slate-950">

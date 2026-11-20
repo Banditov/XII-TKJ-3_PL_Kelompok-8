@@ -18,14 +18,19 @@ function loadingScreen() {
         },
 
         initLivewireLoading() {
-            if (typeof Livewire !== 'undefined') {
-                Livewire.hook('request', ({ succeed, fail }) => {
-                    this.showLoader();
+            if (typeof Livewire === 'undefined') return;
 
-                    succeed(() => this.hideLoader());
-                    fail(() => this.hideLoader());
+            Livewire.hook('commit', ({ component, commit, respond, succeed, fail }) => {
+                this.showLoader();
+
+                succeed(({ snapshot, effect }) => {
+                    this.hideLoader();
                 });
-            }
+
+                fail(() => {
+                    this.hideLoader();
+                });
+            });
         },
 
         initNavigationLoading() {
