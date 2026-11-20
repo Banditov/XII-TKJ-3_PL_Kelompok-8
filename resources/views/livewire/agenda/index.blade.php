@@ -1,16 +1,21 @@
 <section>
     <!-- Header -->
-    <header class="mb-8 flex items-center justify-between">
+    <header class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Agenda</h1>
-            <p class="font-semibold">XII TKJ 3</p>
+            <p class="font-semibold">{{ $this->className }}</p>
         </div>
 
-        <a href="{{ route('agenda.create') }}" wire:navigate
-            class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
-            <p class="4xs:hidden sm:block">Tambah</p>
-            <p class="text-2xl leading-none">+</p>
-        </a>
+        <div class="flex items-center gap-4">
+            <x-class-selector :classes="$classes ?? []" selected="selectedClassId"
+                :isTeacher="Auth::guard('teacher')->check()" />
+
+            <a href="{{ route('agenda.create', ['class_id' => $selectedClassId]) }}" wire:navigate
+                class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
+                <p class="4xs:hidden sm:block">Tambah</p>
+                <p class="text-2xl leading-none">+</p>
+            </a>
+        </div>
     </header>
 
     {{-- Success Message --}}
@@ -73,14 +78,11 @@
 
             <div x-show="open" x-collapse
                 class="flex min-h-40 items-center justify-center rounded-[18px] border border-white/10 bg-white/5 p-6 shadow-inner shadow-black/20 backdrop-blur-sm 4xs:zoom-60 3xs:zoom-80 sm:zoom-100">
-                @if (count($tasksNow) === 0)
-                    <div class="flex flex-col items-center gap-4 text-white/40">
-                        {!! icon('task', 'h-12 w-12') !!}
-                        <p class="text-3xl font-semibold">Tidak ada tugas! :D</p>
-                    </div>
+                @if (count($this->tasksNow) === 0)
+                    <x-empty-state message="Tidak ada tugas! :D" icon="task" />
                 @else
                     <div class="w-full space-y-3">
-                        @foreach ($tasksNow as $task)
+                        @foreach ($this->tasksNow as $task)
                             @php
                                 $date = \Carbon\Carbon::parse($task['date']);
                             @endphp
@@ -106,17 +108,13 @@
                                     <span>{{ $task['description'] }}</span>
                                 </div>
 
-                                <div class="flex items-center gap-3">
-                                    <a href="{{ route('agenda.edit', $task['id']) }}" wire:navigate
-                                        class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80">
-                                        {!! icon('pencil', 'h-5 w-5') !!}
-                                    </a>
-                                    <button wire:click="delete({{ $task['id'] }})"
-                                        wire:confirm="Yakin ingin menghapus agenda ini?"
-                                        class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80">
-                                        {!! icon('delete', 'h-5 w-5') !!}
-                                    </button>
-                                </div>
+                                <x-row-actions 
+                                    :editRoute="route('agenda.edit', ['id' => $task['id'], 'class_id' => $selectedClassId])"
+                                    :deleteId="$task['id']"
+                                    deleteName="agenda ini" 
+                                    deleteAction="confirmDelete"
+                                    :deleteParams="[$task['id'], $task['title']]"
+                                />
                             </div>
                         @endforeach
                     </div>
@@ -157,23 +155,17 @@
                             </div>
                             <span>{{ $lateTask['description'] }}</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <a href="{{ route('agenda.edit', $lateTask['id']) }}" wire:navigate
-                                class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80">
-                                {!! icon('pencil', 'h-5 w-5') !!}
-                            </a>
-                            <button wire:click="delete({{ $lateTask['id'] }})"
-                                wire:confirm="Yakin ingin menghapus agenda ini?"
-                                class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80">
-                                {!! icon('delete', 'h-5 w-5') !!}
-                            </button>
-                        </div>
+
+                        <x-row-actions 
+                            :editRoute="route('agenda.edit', ['id' => $lateTask['id'], 'class_id' => $selectedClassId])"
+                            :deleteId="$lateTask['id']"
+                            deleteName="agenda ini" 
+                            deleteAction="confirmDelete"
+                            :deleteParams="[$lateTask['id'], $lateTask['title']]"
+                        />
                     </div>
                 @empty
-                    <div class="flex flex-col items-center gap-4 text-white/40 py-8">
-                        {!! icon('correct', 'h-12 w-12') !!}
-                        <p class="text-2xl font-semibold">Tidak ada tugas yang lewat! :D</p>
-                    </div>
+                    <x-empty-state message="Tidak ada tugas yang lewat! :D" icon="check" />
                 @endforelse
             </div>
         </div>

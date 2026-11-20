@@ -1,5 +1,4 @@
 <?php
-// app/Models/Teacher.php
 
 namespace App\Models;
 
@@ -22,5 +21,11 @@ class Teacher extends Authenticatable
     protected function casts(): array
     {
         return ['password' => 'hashed'];
+    }
+
+    public function schoolClasses()
+    {
+        return $this->belongsToMany(SchoolClass::class, 'class_teacher', 'teacher_id', 'class_id')
+            ->withTimestamps();
     }
 }

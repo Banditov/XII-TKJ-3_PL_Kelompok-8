@@ -2,10 +2,10 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-0.11.0-red">
+      <img src="https://img.shields.io/badge/GitHub Version-1.0.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
+      <img src="https://img.shields.io/badge/Latest Release-1.0.0-green">
    </a> --><br>
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-blue.svg">
@@ -28,7 +28,6 @@
 - [Instalasi](#instalasi)
 - [Fitur Utama](#fitur-utama)
 - [Penggunaan](#penggunaan)
-- [Arsitektur](#arsitektur)
 - [Kontributor](#kontributor)
 - [Lisensi](#lisensi)
 - [Changelog](#changelog)
@@ -82,8 +81,26 @@ Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang
 `composer install` & `npm install`<br>
 5. Setelah semua sudah selesai, masuk ke dalam folder proyek (gunakan command `code .`), terus copy-paste file `.env.example` dan ganti namanya menjadi `.env`.<br>
 6. Setelah membuat file baru tersebut, pindah kembali ke terminal dan gunakan command `php artisan key:generate` & `php artisan migrate`. Apabila command `php artisan migrate` menanyakan apakah ingin membuat database baru, respon dengan `yes`.<br>
-7. Setelah database sudah dibuat, jalankan command `composer run dev` dan tekan link dengan label APP_URL.<br>
-8. Selesai :D
+7. Setelah database sudah dibuat, jalankan command `php artisan storage:link` dan `composer run dev` dan tekan link dengan label APP_URL.<br>
+8. Login masuk ke akun admin dengan username: `admin@ski.sch.id` dan password: `password123`.
+9. Selesai. :D
+</details>
+
+### Step 3 (Opsional untuk login Google)
+
+<details>
+   <summary>Step 3</summary>
+
+1. Buka halaman [Google Cloud Console](https://console.cloud.google.com/) dan buat proyek baru.
+2. Buka menu `Quick Access` > `APIs & Services` > `Credentials`.
+3. Tekan `Create Credentials` dan pilih `OAuth client ID`.
+4. Masukin informasi yang diminta pada bagian pertama.
+5. Pada bagian kedua, pilih audiens `Internal`.
+6. Masukin informasi yang diminta pada bagian ketiga dan konfirmasi pada bagian keempat.
+7. Tekan `Create OAuth client` terus pilih application type `Web application`.
+8. Tambahkan authorized redirect URI: `http://localhost:8000/auth/google/callback`.
+9. Tekan `Create` terus ambil `Client ID` dan `Client secret` dan tambahkan informasi tersebut ke `.env` pada bagian paling bawah.
+10. Selesai. :D
 </details>
 </details>
 </details>
@@ -196,8 +213,8 @@ Logimm adalah sebuah website yang digunakan untuk mengorganisir kelas-kelas yang
 ## Kontributor
 
 <img src="https://avatars.githubusercontent.com/u/199484083" width="20"> [Christopher V. C. - "Banditov"](https://github.com/Banditov), sebagai ketua & full-stack developer.<br>
-<img src="https://avatars.githubusercontent.com/u/253169611" width="20"> [Michelle N. - "MN ( o v o )"](https://github.com/idunno2467), sebagai UI/UX designer.<br>
-<img src="https://avatars.githubusercontent.com/u/226641799" width="20"> [Valentino - "Naomikoshi"](https://github.com/Naomikoshi), sebagai front-end developer.
+<img src="https://avatars.githubusercontent.com/u/253169611" width="20"> [Michelle N. - "MN ( o v o )"](https://github.com/idunno2467), sebagai UI/UX designer & back-end developer.<br>
+<img src="https://avatars.githubusercontent.com/u/226641799" width="20"> [Valentino - "Naomikoshi"](https://github.com/Naomikoshi), sebagai front-end developer & back-end developer.
 
 ## Lisensi
 
@@ -210,6 +227,25 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 
 <details>
    <summary>November</summary>
+
+
+### 20/11/2026 - 1.0.0
+
+<details>
+
+- Membuat back-end untuk halaman pendataan perlengkapan dan halaman pendataan SIM
+- Komponenisasi kode
+- Refactor & perbaikan kode
+- Memperbarui bagian instalasi pada README
+- Memperbarui dependencies
+</details>
+
+### 18/11/2026 - 0.12.0
+
+<details>
+
+- Membuat back-end untuk halaman agenda
+</details>
 
 ### 10/11/2026 - 0.11.0
 

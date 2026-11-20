@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Auth;
 
 use App\Models\SchoolClass;

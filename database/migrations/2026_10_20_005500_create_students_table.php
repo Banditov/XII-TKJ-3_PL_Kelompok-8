@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->foreignId('class_id')->nullable()->constrained('classes')->nullOnDelete();
-            $table->foreignId('sim_card_id')->nullable()->constrained('sim_cards')->nullOnDelete();
+            $table->string('sim_card_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

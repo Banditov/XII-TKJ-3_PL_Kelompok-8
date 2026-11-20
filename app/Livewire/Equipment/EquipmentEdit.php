@@ -2,68 +2,107 @@
 
 namespace App\Livewire\Equipment;
 
-use App\Data\EquipmentData;
+use App\Models\Equipment;
+use App\Models\SchoolClass;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-#[Layout('layouts.app', ['active' => 'equipment.edit'])]
+#[Layout('layouts.app', ['active' => 'equipment'])]
 class EquipmentEdit extends Component
 {
+    private const MAX_TOTAL = 100000;
+
     public ?int $equipmentId = null;
+    public ?int $classId = null;
     public string $name = '';
     public int $total = 1;
     public string $description = '';
-
-    protected $rules = [
-        'name' => 'required|min:3|max:255',
-        'total' => 'required|integer|min:1',
-        'description' => 'nullable|max:1000',
-    ];
+    public string $className = '';
 
     protected $messages = [
         'name.required' => 'Nama peralatan wajib diisi.',
         'name.min' => 'Nama minimal 3 karakter.',
+        'name.max' => 'Nama maksimal 255 karakter.',
+        'name.unique' => 'Perlengkapan dengan nama ini sudah ada di kelas tersebut.',
         'total.required' => 'Total wajib diisi.',
+        'total.integer' => 'Total harus berupa angka bulat.',
         'total.min' => 'Total minimal 1.',
+        'total.max' => 'Total maksimal 100000.',
+        'description.max' => 'Catatan maksimal 1000 karakter.',
     ];
 
     public function mount(int $id): void
     {
         $this->equipmentId = $id;
+        $equipment = $this->findAccessibleEquipment();
 
-        $equipment = EquipmentData::find($id);
+        $this->classId = $equipment->class_id;
+        $this->name = $equipment->name;
+        $this->total = $equipment->total;
+        $this->description = $equipment->description ?? '';
+        $this->className = SchoolClass::find($this->classId)?->name ?? 'XII TKJ 3';
+    }
 
-        if (!$equipment) {
-            abort(404, 'Peralatan tidak ditemukan.');
-        }
+    public function increment(): void
+    {
+        $this->total = min(self::MAX_TOTAL, $this->total + 1);
+    }
 
-        $this->name = $equipment['name'];
-        $this->total = $equipment['total'];
-        $this->description = $equipment['description'] ?? '';
+    public function decrement(): void
+    {
+        $this->total = max(1, $this->total - 1);
     }
 
     public function save(): void
     {
-        $this->validate();
+        $equipment = $this->findAccessibleEquipment();
 
-        try {
-            session()->flash('success', 'Peralatan berhasil diperbarui!');
-            $this->redirect(route('equipment.index'));
+        $validated = $this->validate([
+            'name' => [
+                'required',
+                'min:3',
+                'max:255',
+                Rule::unique('equipment', 'name')
+                    ->ignore($equipment->id)
+                    ->where('class_id', $equipment->class_id),
+            ],
+            'total' => 'required|integer|min:1|max:100000',
+            'description' => 'nullable|max:1000',
+        ]);
 
-        } catch (\Exception $e) {
-            session()->flash('error', 'Gagal memperbarui peralatan. Silakan coba lagi.');
-        }
+        $equipment->update([
+            'name' => trim($validated['name']),
+            'total' => $validated['total'],
+            'description' => trim($validated['description'] ?? '') ?: null,
+        ]);
+
+        session()->flash('success', 'Peralatan berhasil diperbarui!');
+
+        $this->redirect(route('equipment.index', ['class_id' => $this->classId]), navigate: true);
     }
 
     public function delete(): void
     {
-        try {
-            session()->flash('success', 'Peralatan berhasil dihapus!');
-            $this->redirect(route('equipment.index'));
+        $this->findAccessibleEquipment()->delete();
 
-        } catch (\Exception $e) {
-            session()->flash('error', 'Gagal menghapus peralatan. Silakan coba lagi.');
+        session()->flash('success', 'Peralatan berhasil dihapus!');
+
+        $this->redirect(route('equipment.index', ['class_id' => $this->classId]), navigate: true);
+    }
+
+    private function findAccessibleEquipment(): Equipment
+    {
+        $query = Equipment::query();
+
+        if ($student = Auth::guard('student')->user()) {
+            $query->where('class_id', $student->class_id);
+        } elseif (! Auth::guard('teacher')->check()) {
+            abort(403);
         }
+
+        return $query->findOrFail($this->equipmentId);
     }
 
     public function render()

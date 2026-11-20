@@ -27,7 +27,7 @@
                     Email Address
                 </label>
                 <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                    <div class="absolute inset-y-0 left-0 pl-5 flex items-center">
                         <p class="text-white/30">@</p>
                     </div>
                     <input type="email" id="email" wire:model="email" autofocus
@@ -48,7 +48,7 @@
                     Password
                 </label>
                 <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         {!! icon('lock', 'h-5 w-5 text-white/30') !!}
                     </div>
                     <input type="password" id="password" wire:model="password" :type="show ? 'text' : 'password'"
@@ -56,12 +56,8 @@
                         placeholder="Masukkan password Anda">
                     <button type="button" @click="show = !show"
                         class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white/70 transition-colors">
-                        <span x-show="!show">
-                            {!! icon('eye-slash', 'h-5 w-5 text-white/30') !!}
-                        </span>
-                        <span x-show="show" x-cloak>
-                            {!! icon('eye', 'h-5 w-5 text-white/30') !!}
-                        </span>
+                        <span x-show="!show">{!! icon('eye-slash', 'h-5 w-5 text-white/30') !!}</span>
+                        <span x-show="show" x-cloak>{!! icon('eye', 'h-5 w-5 text-white/30') !!}</span>
                     </button>
                 </div>
                 @error('password')

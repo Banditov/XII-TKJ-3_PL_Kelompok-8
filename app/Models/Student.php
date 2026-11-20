@@ -1,5 +1,4 @@
 <?php
-// app/Models/Student.php
 
 namespace App\Models;
 
@@ -16,7 +15,7 @@ class Student extends Authenticatable
         'email',
         'password',
         'class_id',
-        'sim_card_id',
+        'sim_card_path',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -29,11 +28,6 @@ class Student extends Authenticatable
     public function schoolClass()
     {
         return $this->belongsTo(SchoolClass::class, 'class_id');
-    }
-
-    public function simCard()
-    {
-        return $this->belongsTo(SimCard::class, 'sim_card_id');
     }
 
     public function absents()

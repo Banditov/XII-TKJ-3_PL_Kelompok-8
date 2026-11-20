@@ -6,23 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('sim_cards', function (Blueprint $table) {
+        Schema::create('class_teacher', function (Blueprint $table) {
             $table->id();
-            $table->string('path')->unique();
+            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->unique(['teacher_id', 'class_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('sim_cards');
+        Schema::dropIfExists('class_teacher');
     }
 };

@@ -18,15 +18,8 @@ function loadingScreen() {
         },
 
         initLivewireLoading() {
-            if (typeof Livewire !== 'undefined') {
-                Livewire.hook('request', ({ succeed, fail }) => {
-                    this.showLoader();
-
-                    succeed(() => this.hideLoader());
-                    fail(() => this.hideLoader());
             if (typeof Livewire === 'undefined') return;
 
-            // Livewire v3: hook into commit, which wraps request/response
             Livewire.hook('commit', ({ component, commit, respond, succeed, fail }) => {
                 this.showLoader();
 
