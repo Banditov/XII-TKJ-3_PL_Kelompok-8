@@ -2,7 +2,7 @@
 <br>
 <div align="center">
    <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
-      <img src="https://img.shields.io/badge/GitHub Version-0.12.1-red">
+      <img src="https://img.shields.io/badge/GitHub Version-0.13.0-red">
    </a>
    <!-- <a href="https://github.com/Banditov/XII-TKJ-3_PL_Kelompok-8?tab=readme-ov-file#changelog">
       <img src="https://img.shields.io/badge/Latest Release-1.1.1-green">
@@ -229,6 +229,13 @@ Didistribusikan di bawah Lisensi MIT. Lihat [`LICENSE`](./LICENSE) untuk informa
 <details>
    <summary>November</summary>
 
+
+### 20/11/2026 - 0.13.0
+
+<details>
+
+- Membuat back-end untuk halaman pendataan perlengkapan
+</details>
 
 ### 20/11/2026 - 0.12.1
 

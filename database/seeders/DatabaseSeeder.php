@@ -1,5 +1,4 @@
 <?php
-// database/seeders/DatabaseSeeder.php
 
 namespace Database\Seeders;
 
@@ -12,8 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClassSeeder::class,
             AdminSeeder::class,
-            EquipmentSeeder::class,
-            TeacherClassSeeder::class
         ]);
     }
 }

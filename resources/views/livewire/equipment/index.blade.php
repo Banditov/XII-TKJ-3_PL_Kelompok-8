@@ -1,26 +1,28 @@
 <section>
-    <header class="mb-8 flex items-center justify-between">
+    <header class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Perlengkapan</h1>
+            <p class="font-semibold">{{ $className }}</p>
+        </div>
+
+        <div class="flex items-center gap-4">
             @if (count($classes) > 1)
                 <select wire:model.live="classId"
-                    class="w-fit rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 font-semibold text-white">
+                    class="rounded-[14px] bg-white/5 border border-white/20 px-4 py-2.5 text-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-blue-400/30 appearance-none cursor-pointer">
                     @foreach ($classes as $class)
-                        <option value="{{ $class['id'] }}" class="text-black">
+                        <option value="{{ $class['id'] }}" class="bg-slate-900 text-white">
                             {{ $class['name'] }}
                         </option>
                     @endforeach
                 </select>
-            @else
-                <p class="font-semibold">{{ $className }}</p>
             @endif
-        </div>
 
-        <a href="{{ route('equipment.create') }}" wire:navigate
-            class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
-            <p class="4xs:hidden sm:block">Tambah</p>
-            <p class="text-2xl leading-none">+</p>
-        </a>
+            <a href="{{ route('equipment.create', ['class_id' => $classId]) }}" wire:navigate
+                class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
+                <p class="4xs:hidden sm:block">Tambah</p>
+                <p class="text-2xl leading-none">+</p>
+            </a>
+        </div>
     </header>
 
     @if (session()->has('error'))

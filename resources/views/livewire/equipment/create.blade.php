@@ -28,7 +28,7 @@
             <label for="name" class="text-lg font-semibold text-white/80">
                 Nama Perlengkapan <span class="text-red-400">*</span>
             </label>
-            <input type="text" id="name" wire:model.live="name" autofocus
+            <input type="text" id="name" wire:model="name" autofocus
                 class="zoom-120 w-full p-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10"
                 placeholder="Contoh: Papan Tulis">
             @error('name')
@@ -66,7 +66,7 @@
                     class="flex h-15 w-15 text-3xl aspect-square items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80"
                     aria-label="Kurangi">-</button>
 
-                <input type="number" id="total" wire:model.live="total" min="1"
+                <input type="number" id="total" wire:model="total" min="1"
                     class="w-full bg-transparent text-center text-2xl font-bold text-white focus:outline-none">
 
                 <button type="button" wire:click="increment"
@@ -87,7 +87,7 @@
             <label for="description" class="text-lg font-semibold text-white/80">
                 Catatan Tambahan
             </label>
-            <textarea id="description" wire:model.live="description"
+            <textarea id="description" wire:model="description"
                 class="zoom-120 w-full h-full p-4 bg-white/5 backdrop-blur-sm border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/30 transition-all duration-300 hover:bg-white/10"
                 placeholder="Isi catatan tambahan..."></textarea>
             @error('description')
