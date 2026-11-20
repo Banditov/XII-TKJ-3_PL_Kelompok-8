@@ -1,9 +1,19 @@
 <section>
-    <!-- Header -->
     <header class="mb-8 flex items-center justify-between">
         <div class="flex flex-col gap-2 text-white">
             <h1 class="text-5xl font-bold">Perlengkapan</h1>
-            <p class="font-semibold">XII TKJ 3</p>
+            @if (count($classes) > 1)
+                <select wire:model.live="classId"
+                    class="w-fit rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 font-semibold text-white">
+                    @foreach ($classes as $class)
+                        <option value="{{ $class['id'] }}" class="text-black">
+                            {{ $class['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            @else
+                <p class="font-semibold">{{ $className }}</p>
+            @endif
         </div>
 
         <a href="{{ route('equipment.create') }}" wire:navigate
@@ -13,13 +23,12 @@
         </a>
     </header>
 
-    @if (session()->has('success'))
-        <div class="mb-6 rounded-xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-emerald-300">
-            {{ session('success') }}
+    @if (session()->has('error'))
+        <div class="mb-6 rounded-xl border border-red-400/20 bg-red-500/10 p-4 text-red-300">
+            {{ session('error') }}
         </div>
     @endif
 
-    <!-- Daftar Perlengkapan -->
     <section>
         <h2 class="mb-4 text-3xl font-bold text-white">Daftar Perlengkapan</h2>
         <div class="mb-5 border-b border-white/10"></div>
