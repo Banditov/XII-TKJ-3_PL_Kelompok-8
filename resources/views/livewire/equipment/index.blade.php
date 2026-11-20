@@ -6,16 +6,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            @if (count($classes) > 1)
-                <select wire:model.live="classId"
-                    class="rounded-[14px] bg-white/5 border border-white/20 px-4 py-2.5 text-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-blue-400/30 appearance-none cursor-pointer">
-                    @foreach ($classes as $class)
-                        <option value="{{ $class['id'] }}" class="bg-slate-900 text-white">
-                            {{ $class['name'] }}
-                        </option>
-                    @endforeach
-                </select>
-            @endif
+            <x-class-selector :classes="$classes ?? []" selected="classId" :isTeacher="count($classes) > 1" />
 
             <a href="{{ route('equipment.create', ['class_id' => $classId]) }}" wire:navigate
                 class="flex items-center gap-2 rounded-[14px] bg-linear-to-r from-blue-500 to-sky-300 px-4 py-2.5 text-lg font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:scale-[1.02] active:scale-95">
@@ -37,7 +28,8 @@
 
         <div class="space-y-4">
             @forelse ($equipment as $item)
-                <article class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
+                <article
+                    class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-white transition-all duration-300 hover:bg-white/10">
                     <div class="flex flex-col gap-1">
                         <h3 class="text-2xl font-semibold">{{ $item['name'] }}</h3>
                         <p class="text-white/50">{{ $item['description'] ?? 'Tidak ada catatan' }}</p>
@@ -48,7 +40,8 @@
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80"
                             aria-label="Kurangi">-</button>
 
-                        <span class="flex h-10 w-10 items-center justify-center rounded-[14px] border border-white/10 bg-white/5 text-2xl font-semibold">
+                        <span
+                            class="flex h-10 w-10 items-center justify-center rounded-[14px] border border-white/10 bg-white/5 text-2xl font-semibold">
                             {{ $item['total'] }}
                         </span>
 
@@ -56,24 +49,12 @@
                             class="flex h-10 w-10 items-center justify-center rounded-full border border-lime-400/20 bg-lime-500/10 text-lime-300/50 transition-all duration-300 hover:bg-lime-500/20 hover:text-lime-300/80"
                             aria-label="Tambah">+</button>
 
-                        <a href="{{ route('equipment.edit', $item['id']) }}" wire:navigate
-                            class="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-400/20 bg-yellow-500/10 text-yellow-300/50 transition-all duration-300 hover:bg-yellow-500/20 hover:text-yellow-300/80"
-                            aria-label="Ubah">
-                            {!! icon('pencil', 'h-5 w-5') !!}
-                        </a>
-
-                        <button type="button" wire:click="delete({{ $item['id'] }})"
-                            wire:confirm="Yakin ingin menghapus {{ $item['name'] }}?"
-                            class="flex h-10 w-10 items-center justify-center rounded-full border border-red-400/20 bg-red-500/10 text-red-300/50 transition-all duration-300 hover:bg-red-500/20 hover:text-red-300/80"
-                            aria-label="Hapus">
-                            {!! icon('delete', 'h-5 w-5') !!}
-                        </button>
+                        <x-row-actions :editRoute="route('equipment.edit', $item['id'])" :deleteId="$item['id']"
+                            :deleteName="$item['name']" />
                     </div>
                 </article>
             @empty
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-12 text-center">
-                    <p class="text-white/60">Belum ada perlengkapan.</p>
-                </div>
+                <x-empty-state message="Belum ada perlengkapan." icon="clipboard" />
             @endforelse
         </div>
     </section>
